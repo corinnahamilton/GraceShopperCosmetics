@@ -6,9 +6,8 @@ import Routes from "./Routes";
 const App = () => {
   return (
     <div>
-      <Allproducts />
-      {/* <Navbar />
-      <Routes /> */}
+      <Navbar />
+      <Routes />
     </div>
   );
 };

@@ -13,8 +13,8 @@ export class Allproducts extends React.Component {
         <ul>
           {this.props.products.map((product) => (
             <li key={product.id}>
-              {`${product.brandName} ${product.productName}`}
-              <img src={product.imageURL} />
+              {`${product.brandName} ${product.productName} $${product.price}`}
+              <img src={product.imageURL} width="164" />
             </li>
           ))}
         </ul>
