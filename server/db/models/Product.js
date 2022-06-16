@@ -1,41 +1,42 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Product = db.define('product', {
-  brandName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  productName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  productType: {
-    type: Sequelize.ENUM('face', 'eye', 'lip', 'nail'),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
+const Product = db.define("product", {
+    brandName: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
-  },
-  imageURL: {
-    type: Sequelize.STRING,
-    defaultValue:
-      'https://images.pexels.com/photos/2113855/pexels-photo-2113855.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-  },
-  price: {
-    type: Sequelize.DECIMAL(10, 2),
-    validate: {
-      min: 0,
-      max: 1000,
+    productName: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
-  },
-  stock: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
-  description: {
-    type: Sequelize.TEXT,
-  },
+    productType: {
+        type: Sequelize.ENUM("face", "eye", "lip", "nail"),
+        allowNull: false,
+        defaultValue: "face",
+        validate: {
+            notEmpty: true,
+        },
+    },
+    imageURL: {
+        type: Sequelize.STRING,
+        defaultValue:
+            "https://images.pexels.com/photos/2113855/pexels-photo-2113855.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    },
+    price: {
+        type: Sequelize.DECIMAL(10, 2),
+        validate: {
+            min: 0,
+            max: 1000,
+        },
+    },
+    stock: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    description: {
+        type: Sequelize.TEXT,
+    },
 });
 
 module.exports = Product;

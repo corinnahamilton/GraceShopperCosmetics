@@ -17,23 +17,24 @@ class Eye extends React.Component {
         const eyeProducts = this.props.products.filter(
             (product) => product.productType === "eye"
         );
-        console.log(eyeProducts);
+
         return (
             <div>
-                <p>hello</p>
+                <h2>Eye</h2>
                 <div>
                     {eyeProducts.length ? (
                         eyeProducts.map((product) => {
-                            <div key={product.id}>
-                                <img src={product.imageURL} width="164" />
+                            return (
+                                <div key={product.id}>
+                                    <img src={product.imageURL} width="164" />
 
-                                <p>{product.brandName}</p>
+                                    <p>{product.brandName}</p>
 
-                                <p>{product.productName}</p>
+                                    <p>{product.productName}</p>
 
-                                <p>{product.productName}</p>
-                                <p>{product.price}</p>
-                            </div>;
+                                    <p>{product.price}</p>
+                                </div>
+                            );
                         })
                     ) : (
                         <p>Eye products</p>
