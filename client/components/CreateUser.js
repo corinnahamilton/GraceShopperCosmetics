@@ -6,7 +6,7 @@ export class CreateUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "", //???
+            email: "", //???
             password: "", // ???
         };
         this.handleChange = this.handleChange.bind(this);
@@ -24,7 +24,7 @@ export class CreateUser extends React.Component {
         event.preventDefault();
         this.props.createUser(this.state);
         this.setState({
-            username: "",
+            email: "",
             password: "",
         });
     }
@@ -33,12 +33,12 @@ export class CreateUser extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <label htmlFor="username">User Name</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             type="text"
-                            name="username"
+                            name="email"
                             onChange={this.handleChange}
-                            value={this.state.username}
+                            value={this.state.email}
                         />
                     </div>
                     <div>
