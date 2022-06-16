@@ -1,33 +1,44 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../store/products";
 
-export class Eye extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+class Eye extends React.Component {
     componentDidMount() {
-        this.props.getAllProducts({
-            where: {
-                productType: "eye",
-            },
-        });
+        this.props.fetchProducts();
+        // console.log(products);
+        // let eyeproducts = products.filter(
+        //     (product) => product.productType === "eye"
+        // );
+        // console.log(eyeproducts);
     }
 
     render() {
+        const eyeProducts = this.props.products.filter(
+            (product) => product.productType === "eye"
+        );
+        console.log(eyeProducts);
         return (
             <div>
-                <h1>Eye</h1>
-                <Link to={`/products/${this.props.product.id}`}>
-                    <img src={this.props.product.imageURL} width="164" />
-                </Link>
-                <p>{this.props.product.brandName}</p>
-                <Link to={`/products/${this.props.product.id}`}>
-                    <p>{this.props.product.productName}</p>
-                </Link>
-                <p>{this.props.product.productName}</p>
-                <p>{this.props.product.price}</p>
+                <p>hello</p>
+                <div>
+                    {eyeProducts.length ? (
+                        eyeProducts.map((product) => {
+                            <div key={product.id}>
+                                <img src={product.imageURL} width="164" />
+
+                                <p>{product.brandName}</p>
+
+                                <p>{product.productName}</p>
+
+                                <p>{product.productName}</p>
+                                <p>{product.price}</p>
+                            </div>;
+                        })
+                    ) : (
+                        <p>Eye products</p>
+                    )}
+                </div>
             </div>
         );
     }
@@ -35,8 +46,8 @@ export class Eye extends React.Component {
 
 const mapStateToProps = (state) => ({ products: state.products });
 
-const mapDispatchToProps = (dispatch) => {
-    getAllProducts: () => dispatch(getAllProducts());
-};
+const mapDispatchToProps = (dispatch) => ({
+    fetchProducts: () => dispatch(fetchProducts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Eye);
