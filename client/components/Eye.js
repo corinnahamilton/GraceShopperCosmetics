@@ -6,11 +6,6 @@ import { fetchProducts } from "../store/products";
 class Eye extends React.Component {
     componentDidMount() {
         this.props.fetchProducts();
-        // console.log(products);
-        // let eyeproducts = products.filter(
-        //     (product) => product.productType === "eye"
-        // );
-        // console.log(eyeproducts);
     }
 
     render() {
@@ -26,18 +21,25 @@ class Eye extends React.Component {
                         eyeProducts.map((product) => {
                             return (
                                 <div key={product.id}>
-                                    <img src={product.imageURL} width="164" />
+                                    <Link to={`/products/${product.id}`}>
+                                        <img
+                                            src={product.imageURL}
+                                            width="164"
+                                        />
+                                    </Link>
 
                                     <p>{product.brandName}</p>
 
-                                    <p>{product.productName}</p>
+                                    <Link to={`/products/${product.id}`}>
+                                        <p>{product.productName}</p>
+                                    </Link>
 
-                                    <p>{product.price}</p>
+                                    <p>${product.price}</p>
                                 </div>
                             );
                         })
                     ) : (
-                        <p>Eye products</p>
+                        <h2>Eye products</h2>
                     )}
                 </div>
             </div>

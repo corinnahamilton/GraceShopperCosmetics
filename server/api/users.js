@@ -16,6 +16,14 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.get("/:userid/cart/:cartid/:productid");
+// create a new user
+router.post("/", async (req, res, next) => {
+    try {
+        const newUser = await User.create(req.body);
+        res.json(newUser);
+    } catch (error) {
+        next(error);
+    }
+});
 
-router.post("/", async (req, res, next) => {});
+router.get("/:userid/cart/:cartid/:productid");

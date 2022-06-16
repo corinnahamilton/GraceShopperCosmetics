@@ -4,31 +4,44 @@ import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 
 class Nail extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        this.props.fetchProducts({
-            where: {
-                productType: "Nail",
-            },
-        });
+        this.props.fetchProducts();
     }
 
     render() {
+        const nailProducts = this.props.products.filter(
+            (product) => product.productType === "nail"
+        );
+
         return (
             <div>
-                <h1>Nail</h1>
-                <Link to={`/products/${this.props.product.id}`}>
-                    <img src={this.props.product.imageURL} width="164" />
-                </Link>
-                <p>{this.props.product.brandName}</p>
-                <Link to={`/products/${this.props.product.id}`}>
-                    <p>{this.props.product.productName}</p>
-                </Link>
-                <p>{this.props.product.productName}</p>
-                <p>{this.props.product.price}</p>
+                <h2>Nail</h2>
+                <div>
+                    {nailProducts.length ? (
+                        nailProducts.map((product) => {
+                            return (
+                                <div key={product.id}>
+                                    <Link to={`/products/${product.id}`}>
+                                        <img
+                                            src={product.imageURL}
+                                            width="164"
+                                        />
+                                    </Link>
+
+                                    <p>{product.brandName}</p>
+
+                                    <Link to={`/products/${product.id}`}>
+                                        <p>{product.productName}</p>
+                                    </Link>
+
+                                    <p>${product.price}</p>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <h2>Nail products</h2>
+                    )}
+                </div>
             </div>
         );
     }
