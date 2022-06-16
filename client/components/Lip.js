@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-export class Lip extends React.Component {
+class Lip extends React.Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.getAllProducts({
+        this.props.fetchProducts({
             where: {
                 productType: "Lip",
             },
@@ -36,7 +36,9 @@ export class Lip extends React.Component {
 const mapStateToProps = (state) => ({ products: state.products });
 
 const mapDispatchToProps = (dispatch) => {
-    getAllProducts: () => dispatch(getAllProducts());
+    return {
+        fetchProducts: () => dispatch(fetchProducts()),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lip);

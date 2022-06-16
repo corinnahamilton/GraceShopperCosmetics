@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../store/products";
 
-export class Nail extends React.Component {
+class Nail extends React.Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.getAllProducts({
+        this.props.fetchProducts({
             where: {
                 productType: "Nail",
             },
@@ -35,8 +36,8 @@ export class Nail extends React.Component {
 
 const mapStateToProps = (state) => ({ products: state.products });
 
-const mapDispatchToProps = (dispatch) => {
-    getAllProducts: () => dispatch(getAllProducts());
-};
+const mapDispatchToProps = (dispatch) => ({
+    fetchProducts: () => dispatch(fetchProducts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nail);
