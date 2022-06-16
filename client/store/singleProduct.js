@@ -2,16 +2,16 @@ import axios from "axios";
 
 const ONE_PRODUCT = "ONE_PRODUCT";
 
-export const _oneProduct = (product) => {
+export const _singleProduct = (product) => {
     return {
         type: ONE_PRODUCT,
         product,
     };
 };
 
-export const oneProduct = (id) => async (dispatch) => {
+export const singleProduct = (id) => async (dispatch) => {
     const { data: product } = await axios.get(`/api/products/${id}`);
-    dispatch(_oneProduct(product));
+    dispatch(_singleProduct(product));
 };
 
 export default function singleProductReducer(state = {}, action) {

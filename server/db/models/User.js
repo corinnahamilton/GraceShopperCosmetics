@@ -20,14 +20,9 @@ const User = db.define("user", {
     },
     deliveryAddress: {
         type: Sequelize.STRING,
-        allowNull: false,
     },
     creditCard: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            isCreditCard: true,
-        },
     },
 });
 

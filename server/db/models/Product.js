@@ -24,7 +24,7 @@ const Product = db.define("product", {
             "https://images.pexels.com/photos/2113855/pexels-photo-2113855.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
     },
     price: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: Sequelize.INTEGER,
         validate: {
             min: 0,
             max: 1000,

@@ -2,15 +2,12 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Cart = db.define("cart", {
-    price: {
-        type: Sequelize.DECIMAL(10, 2),
-        validate: {
-            min: 0,
-            max: 1000,
-        },
-    },
-    quantity: {
-        type: Sequelize.INTEGER,
+    // orderId: {
+    //     type: Sequelize.STRING,
+    // },
+    isCompleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
     },
 });
 

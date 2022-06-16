@@ -10,6 +10,7 @@ import Eye from "./components/Eye";
 import Face from "./components/Face";
 import Lip from "./components/Lip";
 import Nail from "./components/Nail";
+import CreateUser from "./components/CreateUser";
 import { me } from "./store/auth";
 
 /**
@@ -37,7 +38,7 @@ class Routes extends Component {
                         <Route exact path="/products/face" component={Face} />
                         <Route exact path="/products/nail" component={Nail} />
                         <Route path="/login" component={Login} />
-                        <Route path="/signup" component={Signup} />
+                        <Route path="/signup" component={CreateUser} />
                         <Route exact path="/cart" component={Cart} />
                         <Route
                             exact
