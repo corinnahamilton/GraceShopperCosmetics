@@ -42,6 +42,7 @@ router.post("/:userId/:productId", async (req, res, next) => {
     const [cart, created] = await Cart.findOrCreate({
       where: { userId: req.params.userId },
       isCompleted: false,
+      include: Product
     });
     //
     const cartProduct = await CartProduct.findOne({
@@ -63,7 +64,7 @@ router.post("/:userId/:productId", async (req, res, next) => {
         through: { quantity: 1, price: product.price },
       });
     }
-    console.log(product);
+    // console.log(product);
     res.send(cart);
   } catch (err) {
     next(err);
