@@ -44,7 +44,7 @@ export class CreateUser extends React.Component {
           <div>
             <label htmlFor='password'>Password</label>
             <input
-              type='text'
+              type='password'
               name='password'
               onChange={this.handleChange}
               value={this.state.password}
