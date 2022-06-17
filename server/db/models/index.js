@@ -19,13 +19,13 @@ Cart.belongsTo(User);
 // Cart.hasMany(CartProduct)
 // CartProduct.belongsTo(Cart)
 
-Product.belongsToMany(Cart, { through: "CartProduct" });
-Cart.belongsToMany(Product, { through: "CartProduct" });
+Product.belongsToMany(Cart, { through: CartProduct });
+Cart.belongsToMany(Product, { through: CartProduct });
 
 module.exports = {
-    db,
-    User,
-    Product,
-    Cart,
-    CartProduct,
+  db,
+  User,
+  Product,
+  Cart,
+  CartProduct,
 };
