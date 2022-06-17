@@ -2,24 +2,31 @@ import axios from 'axios';
 
 const CREATE_USER = 'CREATE_USER';
 
-export const _createUser = (user) => {
+export const _createUser = (email) => {
   return {
     type: CREATE_USER,
-    user,
+    email,
   };
 };
 
-export const createUser = (user) => {
+export const createUser = (user, history) => {
   return async (dispatch) => {
-    const { data: created } = await axios.post('api/users', user);
-    dispatch(_createUser(created));
+    const { data: token } = await axios.post('/api/users', user);
+    window.localStorage.setItem('token', token);
+    const { data: email } = await axios.get('/api/users/email', {
+      headers: {
+        token,
+      },
+    });
+    dispatch(_createUser(email));
+    history.push('/');
   };
 };
 
-export default function createUserReducer(state = { user: [] }, action) {
-  switch (action.types) {
+export default function createUserReducer(state = '', action) {
+  switch (action.type) {
     case CREATE_USER:
-      return { users };
+      return action.email;
     default:
       return state;
   }

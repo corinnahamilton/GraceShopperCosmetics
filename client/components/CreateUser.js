@@ -22,11 +22,14 @@ export class CreateUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createUser(this.state);
-    this.setState({
-      email: '',
-      password: '',
-    });
+    try {
+      this.props.createUser(this.state);
+    } catch (error) {
+      this.setState({
+        email: '',
+        password: '',
+      });
+    }
   }
   render() {
     return (
@@ -58,8 +61,10 @@ export class CreateUser extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createUser: (props) => dispatch(createUser(props)),
-});
+const mapDispatchToProps = (dispatch, otherProps) => {
+  return {
+    createUser: (props) => dispatch(createUser(props, otherProps.history)),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(CreateUser);
