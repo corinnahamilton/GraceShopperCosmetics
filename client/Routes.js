@@ -17,60 +17,56 @@ import { me } from "./store/auth";
  * COMPONENT
  */
 class Routes extends Component {
-    componentDidMount() {
-        this.props.loadInitialData();
-    }
+  componentDidMount() {
+    this.props.loadInitialData();
+  }
 
-    render() {
-        const { isLoggedIn } = this.props;
+  render() {
+    const { isLoggedIn } = this.props;
 
-        return (
-            <div>
-                {isLoggedIn ? (
-                    <Switch>
-                        <Route path="/home" component={Home} />
-                        <Redirect to="/home" />
-                    </Switch>
-                ) : (
-                    <Switch>
-                        <Route exact path="/products/eye" component={Eye} />
-                        <Route exact path="/products/lip" component={Lip} />
-                        <Route exact path="/products/face" component={Face} />
-                        <Route exact path="/products/nail" component={Nail} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/signup" component={CreateUser} />
-                        <Route exact path="/cart" component={Cart} />
-                        <Route
-                            exact
-                            path="/products/:id"
-                            component={SingleProduct}
-                        />
-                        <Route exact path="/products" component={AllProducts} />
-                        <Route exact path="/" component={Home} />
-                    </Switch>
-                )}
-            </div>
-        );
-    }
+    return (
+      <div>
+        {isLoggedIn ? (
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Redirect to="/home" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/products/eye" component={Eye} />
+            <Route exact path="/products/lip" component={Lip} />
+            <Route exact path="/products/face" component={Face} />
+            <Route exact path="/products/nail" component={Nail} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={CreateUser} />
+            <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        )}
+      </div>
+    );
+  }
 }
 
 /**
  * CONTAINER
  */
 const mapStateToProps = (state) => {
-    return {
-        // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-        // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-        isLoggedIn: !!state.auth.id,
-    };
+  return {
+    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
+    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+    isLoggedIn: !!state.auth.id,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        loadInitialData() {
-            dispatch(me());
-        },
-    };
+  return {
+    loadInitialData() {
+      dispatch(me());
+    },
+  };
 };
 
 // The `withRouter` wrapper makes sure that updates are not blocked
