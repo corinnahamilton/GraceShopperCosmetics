@@ -19,8 +19,7 @@ router.get('/', async (req, res, next) => {
 // create a new user
 router.post('/', async (req, res, next) => {
   try {
-    console.log('CONSOLE LOG', req.body);
-    const newUser = await User.create(req.body);
+    await User.create(req.body);
     const userToken = await User.generateToken();
     res.send(userToken);
   } catch (error) {
@@ -37,7 +36,3 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
-
-//log in
-
-// router.get('/:userid/cart/:cartid/:productid');
