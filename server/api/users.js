@@ -19,8 +19,8 @@ router.get('/', async (req, res, next) => {
 // create a new user
 router.post('/', async (req, res, next) => {
   try {
-    await User.create(req.body);
-    const userToken = await User.generateToken();
+    const newUser = await User.create(req.body);
+    const userToken = await newUser.generateToken();
     res.send(userToken);
   } catch (error) {
     next(error);
@@ -32,6 +32,16 @@ router.post('/', async (req, res, next) => {
   try {
     const token = await User.authenticate(req.body);
     res.send(token);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//get email
+router.get('/email', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.token);
+    res.send(user.email);
   } catch (error) {
     next(error);
   }
