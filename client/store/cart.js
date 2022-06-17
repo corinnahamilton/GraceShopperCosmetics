@@ -34,7 +34,7 @@ export const getCartThunk = (userId) => async (dispatch) => {
     const {data} = await Axios.get(`/api/cart/${userId}`);
     const cart = data[0]
     dispatch(getCart(cart));
-    console.log('cartdata',cart)
+   
   } catch (error) {
     console.log(error);
   }
