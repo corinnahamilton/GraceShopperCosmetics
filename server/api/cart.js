@@ -18,21 +18,21 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-//get a user's past order history
-router.get("/orders/:userId", async (req, res, next) => {
-  try {
-    const orders = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-        isCompleted: true,
-      },
-      include: Product,
-      CartProduct,
-    });
-  } catch (err) {
-    next(err);
-  }
-});
+// //get a user's past order history
+// router.get("/orders/:userId", async (req, res, next) => {
+//   try {
+//     const orders = await Cart.findAll({
+//       where: {
+//         userId: req.params.userId,
+//         isCompleted: true,
+//       },
+//       include: Product,
+//       CartProduct,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 //add to a user's cart
 router.post("/:userId/:productId", async (req, res, next) => {
@@ -42,7 +42,7 @@ router.post("/:userId/:productId", async (req, res, next) => {
     const [cart, created] = await Cart.findOrCreate({
       where: { userId: req.params.userId },
       isCompleted: false,
-      include: Product
+      include: Product,
     });
     //
     const cartProduct = await CartProduct.findOne({
@@ -71,17 +71,39 @@ router.post("/:userId/:productId", async (req, res, next) => {
   }
 });
 
-// //remove a product from cart
-// router.delete("/:userId/:productId", async (req, res, next) => {
-//   try {
-//     const cart = await Cart.findByPk(req.params.cartId);
-//     const product = await Product.findByPk(req.params.productId);
-//     await cart.removeProduct(product);
-//     res.sendStatus(204);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+//remove a product from cart
+router.delete("/:cartId/:productId", async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.cartId);
+    const product = await Product.findByPk(req.params.productId);
+    await cart.removeProduct(product);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//get specific product in cart to retrieve quantity
+router.get("/:userId/:productId", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.params.userId,
+        isCompleted: false,
+      },
+    });
+    const cartProduct = await CartProduct.findOne({
+      where: {
+        cartId: cart.id,
+        productId: product.id,
+      },
+    });
+    res.send(cartProduct);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // //update
 // router.put("/:userId/:productId", async (req, res, next) => {

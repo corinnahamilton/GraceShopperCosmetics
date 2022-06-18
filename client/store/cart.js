@@ -1,6 +1,5 @@
 import Axios from "axios";
 
-
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
@@ -18,9 +17,9 @@ const addToCart = (product) => ({
   product,
 });
 
-const deleteFromCart = (productId) => ({
+const deleteFromCart = (product) => ({
   type: DELETE_FROM_CART,
-  productId,
+  product,
 });
 
 // const placeOrder = (cart, newCart) => ({
@@ -31,10 +30,9 @@ const deleteFromCart = (productId) => ({
 
 export const getCartThunk = (userId) => async (dispatch) => {
   try {
-    const {data} = await Axios.get(`/api/cart/${userId}`);
-    const cart = data[0]
+    const { data } = await Axios.get(`/api/cart/${userId}`);
+    const cart = data[0];
     dispatch(getCart(cart));
-   
   } catch (error) {
     console.log(error);
   }
@@ -44,8 +42,7 @@ export const addToCartThunk = (userId, productId) => async (dispatch) => {
   try {
     const { data } = await Axios.post(`/api/cart/${userId}/${productId}`);
     dispatch(addToCart(data));
-    console.log('cartproduct',data)
-
+    console.log("cartproduct", data);
   } catch (error) {
     console.log(error);
   }
@@ -60,7 +57,7 @@ export const deleteFromCartThunk = (userId, productId) => async (dispatch) => {
   }
 };
 
-export default function cartReducer(state = {}, action) {
+export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
@@ -70,7 +67,7 @@ export default function cartReducer(state = {}, action) {
       return {
         ...state,
         products: state.products.filter(
-          (product) => product.id !== action.productId
+          (product) => product.id !== action.product.id
         ),
       };
     default:
