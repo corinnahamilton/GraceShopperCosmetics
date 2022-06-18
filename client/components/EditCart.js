@@ -11,12 +11,15 @@ class Cart extends React.Component {
   }
   componentDidMount() {
     this.props.getCartProduct(this.props.userId, this.props.productId);
+    // this.setState({
+    //   quantity: this.cartProduct.quantity,
+    // });
   }
 
   render() {
     return (
       <div>
-        <span>Qty:</span>
+        <span>Qty: {this.state.quantity}</span>
       </div>
     );
   }
