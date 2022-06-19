@@ -11,8 +11,9 @@ const getCartProduct = (cartProduct) => {
 
 export const getCartProductThunk = (userId, productId) => async (dispatch) => {
   try {
-    const cartProduct = await Axios.get(`api/cart/${userId}/${productId}`);
-    dispatch(getCartProduct(cartProduct.data));
+    const {data} = await Axios.get(`/api/cart/${userId}/${productId}`);
+    dispatch(getCartProduct(data));
+
   } catch (error) {
     console.log(error);
   }

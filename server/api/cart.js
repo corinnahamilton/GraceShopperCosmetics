@@ -74,9 +74,14 @@ router.post("/:userId/:productId", async (req, res, next) => {
 //remove a product from cart
 router.delete("/:cartId/:productId", async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.params.cartId);
+    const cart = await Cart.findOne({
+      where: {
+        id:req.params.cartId},
+      include: Product});
     const product = await Product.findByPk(req.params.productId);
-    await cart.removeProduct(product);
+    await cart.removeProduct(product,{
+      through:{productId:product.id}
+    });
     res.sendStatus(204);
   } catch (err) {
     next(err);

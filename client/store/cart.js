@@ -17,9 +17,9 @@ const addToCart = (product) => ({
   product,
 });
 
-const deleteFromCart = (product) => ({
+const deleteFromCart = (productId) => ({
   type: DELETE_FROM_CART,
-  product,
+  productId,
 });
 
 // const placeOrder = (cart, newCart) => ({
@@ -32,6 +32,7 @@ export const getCartThunk = (userId) => async (dispatch) => {
   try {
     const { data } = await Axios.get(`/api/cart/${userId}`);
     const cart = data[0];
+    // console.log('data[0]',cart)
     dispatch(getCart(cart));
   } catch (error) {
     console.log(error);
@@ -42,15 +43,15 @@ export const addToCartThunk = (userId, productId) => async (dispatch) => {
   try {
     const { data } = await Axios.post(`/api/cart/${userId}/${productId}`);
     dispatch(addToCart(data));
-    console.log("cartproduct", data);
+    // console.log("cartproduct", data);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteFromCartThunk = (userId, productId) => async (dispatch) => {
+export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
   try {
-    await Axios.delete(`/api/cart/${userId}/${productId}`);
+    await Axios.delete(`/api/cart/${cartId}/${productId}`);
     dispatch(deleteFromCart(productId));
   } catch (error) {
     console.log(error);
@@ -67,7 +68,7 @@ export default function cartReducer(state = { products: [] }, action) {
       return {
         ...state,
         products: state.products.filter(
-          (product) => product.id !== action.product.id
+          (product) => product.id !== action.productId
         ),
       };
     default:

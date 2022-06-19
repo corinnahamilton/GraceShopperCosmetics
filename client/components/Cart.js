@@ -14,14 +14,13 @@ class Cart extends React.Component {
   }
   componentDidMount() {
     const { userId } = this.props.match.params;
-    const cartId = 1;
     this.props.getCart(userId);
-    this.props.getCartProduct(userId, cartId);
+   
   }
 
-  handleClick(event) {
-    const productId = event.target.value;
-    const cartId = 1;
+  handleClick(cartId, productId) {
+    // const productId = event.target.value;
+    // const cartId = this.props.cart.id
     this.props.deleteFromCart(cartId, productId);
   }
 
@@ -40,6 +39,7 @@ class Cart extends React.Component {
 
   render() {
     const cartProducts = this.props.products;
+    // console.log('cart',this.props.ca)
     return (
       <div>
         {cartProducts ? (
@@ -59,7 +59,7 @@ class Cart extends React.Component {
                     <button
                       type="button"
                       value={product.id}
-                      onClick={this.handleClick}
+                      onClick={()=>this.handleClick(this.props.cart.id,product.id)}
                     >
                       X
                     </button>
@@ -81,7 +81,7 @@ class Cart extends React.Component {
 const mapStateToProps = (state) => ({
   products: state.cartReducer.products,
   user: state.user,
-  cart: state.cartReducer.cart,
+  cart: state.cartReducer,
   cartProduct: state.cartProductReducer,
 });
 
@@ -89,8 +89,8 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: (userId) => dispatch(getCartThunk(userId)),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-  getCartProduct: (userId, productId) =>
-    dispatch(getCartProductThunk(userId, productId)),
+  // getCartProduct: (userId, productId) =>
+  //   dispatch(getCartProductThunk(userId, productId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
