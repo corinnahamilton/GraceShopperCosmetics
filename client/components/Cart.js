@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { deleteFromCartThunk, getCartThunk } from "../store/cart";
-import { getCartProductThunk } from "../store/cartProduct";
+
 import EditCart from "./EditCart";
 
 class Cart extends React.Component {
@@ -19,8 +19,7 @@ class Cart extends React.Component {
   }
 
   handleClick(cartId, productId) {
-    // const productId = event.target.value;
-    // const cartId = this.props.cart.id
+  
     this.props.deleteFromCart(cartId, productId);
   }
 
@@ -39,7 +38,7 @@ class Cart extends React.Component {
 
   render() {
     const cartProducts = this.props.products;
-    // console.log('cart',this.props.ca)
+  
     return (
       <div>
         {cartProducts ? (
@@ -63,7 +62,7 @@ class Cart extends React.Component {
                     >
                       X
                     </button>
-                    <EditCart productId={product.id} userId={1} />
+                    <EditCart productId={product.id} userId={1} cartId={this.props.cart.id} />
                   </div>
                 );
               })}
@@ -89,8 +88,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: (userId) => dispatch(getCartThunk(userId)),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-  // getCartProduct: (userId, productId) =>
-  //   dispatch(getCartProductThunk(userId, productId)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

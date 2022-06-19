@@ -89,21 +89,20 @@ router.delete("/:cartId/:productId", async (req, res, next) => {
 });
 
 //get specific product in cart to retrieve quantity
-router.get("/:userId/:productId", async (req, res, next) => {
+router.get("/:userId/:cartId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
       where: {
         userId: req.params.userId,
         isCompleted: false,
       },
     });
-    const cartProduct = await CartProduct.findOne({
+    const cartProduct = await CartProduct.findAll({
       where: {
         cartId: cart.id,
-        productId: product.id,
       },
     });
+    console.log(cartProduct)
     res.send(cartProduct);
   } catch (error) {
     next(error);
