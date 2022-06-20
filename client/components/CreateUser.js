@@ -61,9 +61,6 @@ export class CreateUser extends React.Component {
                     <div>
                         <button type="submit">Submit</button>
                     </div>
-                    {error && error.response && (
-                        <div> {error.response.data} </div>
-                    )}
                 </form>
             </div>
         );
