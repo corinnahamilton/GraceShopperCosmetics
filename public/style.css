@@ -20,3 +20,9 @@ form div {
     margin: 1em;
     display: inline-block;
 }
+
+nav#navbar {
+    background-color: #e6dad1;
+    font-family: Helvetica;
+    font-weight: bold;
+}
