@@ -9,17 +9,18 @@ const getCartProduct = (cartProduct) => {
   };
 };
 
-export const getCartProductThunk = (userId, productId) => async (dispatch) => {
+export const getCartProductThunk = (userId,cartId) => async (dispatch) => {
   try {
-    const {data} = await Axios.get(`/api/cart/${userId}/${productId}`);
+    const {data} = await Axios.get(`/api/cart/${userId}/${cartId}`);
     dispatch(getCartProduct(data));
+    // console.log(data)
 
   } catch (error) {
     console.log(error);
   }
 };
 
-export default function cartProductReducer(state = {}, action) {
+export default function cartProductReducer(state = [], action) {
   switch (action.type) {
     case GET_CART_PRODUCT:
       return action.cartProduct;
