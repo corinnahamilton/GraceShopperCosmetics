@@ -28,8 +28,19 @@ class Routes extends Component {
             <div>
                 {isLoggedIn ? (
                     <Switch>
+                        <Route exact path="/products/eye" component={Eye} />
+                        <Route exact path="/products/lip" component={Lip} />
+                        <Route exact path="/products/face" component={Face} />
+                        <Route exact path="/products/nail" component={Nail} />
+                        <Route path="/signup" component={CreateUser} />
+                        <Route exact path="/products" component={AllProducts} />
+                        <Route exact path="/cart/:userId" component={Cart} />
+                        <Route
+                            exact
+                            path="/products/:id"
+                            component={SingleProduct}
+                        />
                         <Route path="/" component={Home} />
-                        <Redirect to="/" />
                     </Switch>
                 ) : (
                     <Switch>
@@ -39,14 +50,14 @@ class Routes extends Component {
                         <Route exact path="/products/nail" component={Nail} />
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={CreateUser} />
+                        <Route exact path="/products" component={AllProducts} />
+                        <Route exact path="/" component={Home} />
                         <Route exact path="/cart/:userId" component={Cart} />
                         <Route
                             exact
                             path="/products/:id"
                             component={SingleProduct}
                         />
-                        <Route exact path="/products" component={AllProducts} />
-                        <Route exact path="/" component={Home} />
                         <Redirect from="/logout" to="/" />
                     </Switch>
                 )}
