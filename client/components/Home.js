@@ -4,6 +4,9 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 const images = [
     {
+        url: "https://i.postimg.cc/jSCc8n2w/homeimg.png",
+    },
+    {
         url: "https://cdn.pixabay.com/photo/2021/01/06/07/52/lipsticks-5893476_1280.jpg",
     },
     {
@@ -35,7 +38,6 @@ const ImageSlider = () => {
 };
 
 export const Home = (props) => {
-    console.log("PROPS", props);
     const { email } = props;
 
     return (
