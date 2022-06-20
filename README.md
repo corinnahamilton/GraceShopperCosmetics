@@ -1,4 +1,4 @@
-# FS-App-Template
+# Grace Shopper Cosmetics
 
 ## Setup
 
