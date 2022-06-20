@@ -4,10 +4,10 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 const images = [
     {
-        url: "https://images.pexels.com/photos/1161934/pexels-photo-1161934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        url: "https://cdn.pixabay.com/photo/2021/01/06/07/52/lipsticks-5893476_1280.jpg",
     },
     {
-        url: "https://images.unsplash.com/photo-1613255348289-1407e4f2f980?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2030&q=80",
+        url: "https://images.pexels.com/photos/1161934/pexels-photo-1161934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
     {
         url: "https://images.pexels.com/photos/6479582/pexels-photo-6479582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -35,23 +35,21 @@ const ImageSlider = () => {
 };
 
 export const Home = (props) => {
-    const { username } = props;
+    console.log("PROPS", props);
+    const { email } = props;
 
     return (
         <div>
-            <h3>Welcome, {username}</h3>
+            <h1>Welcome {email} !</h1>
             <ImageSlider />
         </div>
     );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
+const mapStateToProps = (state) => {
     return {
-        username: state.auth.username,
+        email: state.auth.email,
     };
 };
 
-export default connect(mapState)(Home);
+export default connect(mapStateToProps)(Home);
