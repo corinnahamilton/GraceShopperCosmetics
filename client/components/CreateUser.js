@@ -37,7 +37,9 @@ export class CreateUser extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">
+                            <p>Email</p>
+                        </label>
                         <input
                             type="text"
                             name="email"
@@ -46,7 +48,9 @@ export class CreateUser extends React.Component {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">
+                            <p>Password</p>
+                        </label>
                         <input
                             type="password"
                             name="password"
@@ -54,8 +58,12 @@ export class CreateUser extends React.Component {
                             value={this.state.password}
                         />
                     </div>
-
-                    <button type="submit">Submit</button>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                    {error && error.response && (
+                        <div> {error.response.data} </div>
+                    )}
                 </form>
             </div>
         );
