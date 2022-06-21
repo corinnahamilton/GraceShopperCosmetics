@@ -1,51 +1,40 @@
-import React from "react";
-import ReactTable from "@kavience/react-table";
-import { fetchProducts } from "../store/products";
+import React, { Component } from "react";
+import MaterialTable, { MTableToolbar } from "material-table";
+import tableIcons from "./MaterialTableIcons";
 import { connect } from "react-redux";
+import { fetchProducts } from "../store/products";
 
-const productColumn = [
-    {
-        title: "Brand Name",
-        align: "center",
-        width: 120,
-        ellipsis: true,
-        dataIndex: "brandName",
-    },
-    {
-        title: "Product Name",
-        dataIndex: "productName",
-    },
-    {
-        title: "Product Type",
-        dataIndex: "productType",
-    },
-    {
-        title: "Price",
-        dataIndex: "price",
-    },
-    {
-        title: "Stock",
-        dataIndex: "stock",
-    },
+var columns = [
+    { title: "Brand Name", field: "brandName" },
+    { title: "Product Name", field: "productName" },
+    { title: "Product Type", field: "productType" },
+    { title: "Price", field: "price" },
+    { title: "Stock", field: "stock" },
 ];
 
-class ProductTable extends React.Component {
+class ProductTable extends Component {
     componentDidMount() {
         this.props.fetchProducts();
     }
 
     render() {
         return (
-            <div>
-                <h2>Product Table</h2>
-                <ReactTable
-                    size="mini"
-                    bordered
-                    rowKey="id"
-                    columns={productColumn}
-                    dataSource={this.props.products}
-                />
-            </div>
+            <MaterialTable
+                title={"Product Table"}
+                icons={tableIcons}
+                options={{
+                    grouping: true,
+                    dense: true,
+                    filtering: true,
+                    exportButton: true,
+                    search: true,
+                }}
+                components={{
+                    Toolbar: (props) => <MTableToolbar {...props} />,
+                }}
+                columns={columns}
+                data={this.props.products}
+            />
         );
     }
 }
