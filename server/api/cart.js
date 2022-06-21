@@ -56,61 +56,8 @@ router.post('/:productId', async (req, res, next) => {
   }
 });
 
-/* //get a user's cart
-router.get("/:userId", async (req, res, next) => {
-  try {
-    const cart = await Cart.findOrCreate({
-      where: {
-        userId: req.params.userId,
-        isCompleted: false,
-      },
-      include: Product,
-    });
-    res.json(cart);
-  } catch (err) {
-    next(err);
-  }
-})
-
-//add to a user's cart
-router.post("/:userId/:productId", async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.productId);
-    //find user's uncompleted cart associated to their id
-    const [cart, created] = await Cart.findOrCreate({
-      where: { userId: req.params.userId },
-      isCompleted: false,
-      include: Product,
-    });
-    //
-    const cartProduct = await CartProduct.findOne({
-      where: {
-        cartId: cart.id,
-        productId: product.id,
-      },
-    });
-    if (cartProduct) {
-      const updatedQty = cartProduct.quantity + 1;
-      await cart.addProduct(product, {
-        through: {
-          quantity: updatedQty,
-          price: product.price,
-        },
-      });
-    } else {
-      await cart.addProduct(product, {
-        through: { quantity: 1, price: product.price },
-      });
-    }
-    // console.log(product);
-    res.send(cart);
-  } catch (err) {
-    next(err);
-  }
-}); */
-
 //update a single product's quantity
-router.put('/plusOne/:userId/:productId', async (req, res, next) => {
+/* router.put('/plusOne/:userId/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
@@ -204,4 +151,4 @@ router.get('/:userId/:cartId', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+}); */

@@ -3,7 +3,6 @@ import Axios from 'axios';
 const GET_CART = 'GET_CART';
 const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_FROM_CART = 'DELETE_FROM_CART';
-const PLACE_ORDER = 'PLACE_ORDER';
 
 const getCart = (cart) => {
   return {
@@ -12,27 +11,15 @@ const getCart = (cart) => {
   };
 };
 
-const addToCart = (product) => ({
+const addToCart = (data) => ({
   type: ADD_TO_CART,
-  product,
+  data,
 });
 
 const deleteFromCart = (productId) => ({
   type: DELETE_FROM_CART,
   productId,
 });
-
-/* //with user id
-export const getCartThunk = (userId) => async (dispatch) => {
-  try {
-    const { data } = await Axios.get(`/api/cart/${userId}`);
-    const cart = data[0];
-    // console.log('data[0]',cart)
-    dispatch(getCart(cart));
-  } catch (error) {
-    console.log(error);
-  }
-}; */
 
 //with token
 export const getCartThunk = () => async (dispatch) => {
@@ -62,15 +49,15 @@ export const addToCartThunk = (productId) => async (dispatch) => {
     console.log(error);
   }
 };
-
-export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
-  try {
-    await Axios.delete(`/api/cart/${cartId}/${productId}`);
-    dispatch(deleteFromCart(productId));
-  } catch (error) {
-    console.log(error);
-  }
-};
+// needs to be rewriten
+// export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
+//   try {
+//     await Axios.delete(`/api/cart/${cartId}/${productId}`);
+//     dispatch(deleteFromCart(productId));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
@@ -78,13 +65,13 @@ export default function cartReducer(state = { products: [] }, action) {
       return action.cart;
     case ADD_TO_CART:
       return { ...state, products: [...state.products, action.product] };
-    case DELETE_FROM_CART:
-      return {
-        ...state,
-        products: state.products.filter(
-          (product) => product.id !== action.productId
-        ),
-      };
+    // case DELETE_FROM_CART:
+    //   return {
+    //     ...state,
+    //     products: state.products.filter(
+    //       (product) => product.id !== action.productId
+    //     ),
+    //   };
 
     default:
       return state;
