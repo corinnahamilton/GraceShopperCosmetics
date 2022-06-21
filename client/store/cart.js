@@ -1,10 +1,8 @@
-import Axios from "axios";
+import Axios from 'axios';
 
-const GET_CART = "GET_CART";
-const ADD_TO_CART = "ADD_TO_CART";
-const DELETE_FROM_CART = "DELETE_FROM_CART";
-const PLACE_ORDER = "PLACE_ORDER";
-
+const GET_CART = 'GET_CART';
+const ADD_TO_CART = 'ADD_TO_CART';
+const DELETE_FROM_CART = 'DELETE_FROM_CART';
 
 const getCart = (cart) => {
   return {
@@ -13,9 +11,9 @@ const getCart = (cart) => {
   };
 };
 
-const addToCart = (product) => ({
+const addToCart = (cart) => ({
   type: ADD_TO_CART,
-  product,
+  cart,
 });
 
 const deleteFromCart = (productId) => ({
@@ -23,52 +21,55 @@ const deleteFromCart = (productId) => ({
   productId,
 });
 
-
-
-export const getCartThunk = (userId) => async (dispatch) => {
+//with token
+export const getCartThunk = () => async (dispatch) => {
   try {
-    const { data } = await Axios.get(`/api/cart/${userId}`);
-    const cart = data[0];
-    // console.log('data[0]',cart)
+    let token = window.localStorage.getItem('token');
+    const { data: cart } = await Axios.get('/api/cart', {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch(getCart(cart));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addToCartThunk = (userId, productId) => async (dispatch) => {
+export const addToCartThunk = (productId) => async (dispatch) => {
   try {
-    const { data } = await Axios.post(`/api/cart/${userId}/${productId}`);
-    dispatch(addToCart(data));
-    // console.log("cartproduct", data);
+    let token = window.localStorage.getItem('token');
+    const { data: cart } = await Axios.post(`/api/cart/${productId}`, {
+      authorization: token,
+    });
+    dispatch(addToCart(cart));
   } catch (error) {
     console.log(error);
   }
 };
-
-export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
-  try {
-    await Axios.delete(`/api/cart/${cartId}/${productId}`);
-    dispatch(deleteFromCart(productId));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
+// needs to be rewriten
+// export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
+//   try {
+//     await Axios.delete(`/api/cart/${cartId}/${productId}`);
+//     dispatch(deleteFromCart(productId));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
     case ADD_TO_CART:
-      return { ...state, products: [...state.products, action.product] };
-    case DELETE_FROM_CART:
-      return {
-        ...state,
-        products: state.products.filter(
-          (product) => product.id !== action.productId
-        ),
-      };
+      return action.cart;
+    // case DELETE_FROM_CART:
+    //   return {
+    //     ...state,
+    //     products: state.products.filter(
+    //       (product) => product.id !== action.productId
+    //     ),
+    //   };
 
     default:
       return state;
