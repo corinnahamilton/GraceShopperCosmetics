@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { singleProduct } from '../store/singleProduct';
-import { addToCartThunk } from '../store/cart';
+import React from "react";
+import { connect } from "react-redux";
+import { singleProduct } from "../store/singleProduct";
+import { addToCartThunk } from "../store/cart";
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -30,9 +30,9 @@ class SingleProduct extends React.Component {
         <h4>{product.description}</h4>
         <h2>{product.price}</h2>
         <h2>
-          <img src={product.imageURL} width='200' />
+          <img src={product.imageURL} width="200" />
         </h2>
-        <button type='button' value={product.id} onClick={this.handleClick}>
+        <button type="button" value={product.id} onClick={this.handleClick}>
           Add To Cart
         </button>
       </div>
