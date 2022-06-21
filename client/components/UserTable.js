@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { fetchUsers } from "../store/createUser";
 
 const columns = [
-    { title: "User ID", field: "id" },
     { title: "Email", field: "email" },
     { title: "User Type", field: "userType" },
 ];
