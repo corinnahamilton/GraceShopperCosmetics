@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { deleteFromCartThunk, getCartThunk } from "../store/cart";
-
+import { getCartProductThunk } from "../store/cartProduct";
 import EditCart from "./EditCart";
 
 class Cart extends React.Component {
@@ -17,6 +17,7 @@ class Cart extends React.Component {
     const { userId } = this.props.match.params;
     this.props.getCart(userId);
    
+   
   }
 
   handleClick(cartId, productId) {
@@ -26,16 +27,27 @@ class Cart extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
-      const cartProducts = this.props.products;
-      if (cartProducts) {
+      const products = this.props.products;
+      const qty = this.props.cartProduct.map((product)=>{
+        return product.quantity
+      })
+    
+      if (products) {
         const prices = this.props.products.map((product) => {
           return product.price;
         });
-        let total = prices.reduce((partialSum, a) => partialSum + a, 0);
+        
+        let pricesQty = []
+        for( var i = 0; i < prices.length; i++ ) {
+          pricesQty.push(prices[i] * qty[i])
+        };
+       
+        let total = pricesQty.reduce((partialSum, a) => partialSum + a, 0);
         this.setState({ total: total });
       }
     }
   }
+  
 
   render() {
     const cartProducts = this.props.products;
@@ -61,7 +73,7 @@ class Cart extends React.Component {
                       value={product.id}
                       onClick={()=>this.handleClick(this.props.cart.id,product.id)}
                     >
-                      X
+                      Remove
                     </button>
                     <EditCart productId={product.id} userId={1} cartId={this.props.cart.id} />
                   </div>
@@ -89,6 +101,8 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: (userId) => dispatch(getCartThunk(userId)),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
+  getCartProduct: (userId, cartId) =>
+    dispatch(getCartProductThunk(userId, cartId)),
 
 });
 

@@ -4,8 +4,7 @@ const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const PLACE_ORDER = "PLACE_ORDER";
-const SUB_QUANTITY = 'SUB_QUANTITY'
-const ADD_QUANTITY = 'ADD_QUANTITY'
+
 
 const getCart = (cart) => {
   return {
@@ -24,26 +23,7 @@ const deleteFromCart = (productId) => ({
   productId,
 });
 
-// const placeOrder = (cart, newCart) => ({
-//     type: PLACE_ORDER,
-//     cart,
-//     newCart,
-// });
-//WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const subtractQuantity = product => {
-  return {
-    type: SUB_QUANTITY,
-    product
-  }
-}
 
-//WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const addQuantity = product => {
-  return {
-    type: ADD_QUANTITY,
-    product
-  }
-}
 
 export const getCartThunk = (userId) => async (dispatch) => {
   try {
@@ -75,25 +55,6 @@ export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
   }
 };
 
-export const addQuantityThunk = (userId, productId) => async (dispatch) => {
-  try {
-    const { data } = await Axios.put(`/api/cart/plusOne/${userId}/${productId}`);
-    dispatch(addQuantity(data));
-    // console.log("data", data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const subQuantityThunk = (userId, productId) => async (dispatch) => {
-  try {
-    const { data } = await Axios.put(`/api/cart/minusOne/${userId}/${productId}`)
-    dispatch(subtractQuantity(data));
-    // console.log("data", data);
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
@@ -108,10 +69,7 @@ export default function cartReducer(state = { products: [] }, action) {
           (product) => product.id !== action.productId
         ),
       };
-    case ADD_QUANTITY:
-      return { ...state, products: [...state.products, action.product]};
-    case SUB_QUANTITY:
-      return { ...state, products: [...state.products, action.product] };
+
     default:
       return state;
   }
