@@ -45,7 +45,6 @@ class Cart extends React.Component {
 
   render() {
     const cartProducts = this.props.products;
-    console.log('CARTPRODUCTS', cartProducts);
 
     return (
       <div>
@@ -54,7 +53,6 @@ class Cart extends React.Component {
             <h1>My Cart</h1>
             <div>
               {cartProducts.map((product) => {
-                console.log('PRODUCT', product);
                 return (
                   <div key={product.id}>
                     <span>
@@ -89,7 +87,6 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE', state);
   return {
     products: state.cartReducer.products,
     user: state.user,

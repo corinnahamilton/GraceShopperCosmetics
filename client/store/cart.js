@@ -60,7 +60,6 @@ export const addToCartThunk = (productId) => async (dispatch) => {
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
     case GET_CART:
-      console.log('GET_CART', action.cart);
       return action.cart;
     case ADD_TO_CART:
       return action.cart;
