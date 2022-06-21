@@ -35,7 +35,6 @@ export const fetchUsers = () => {
     return async (dispatch) => {
         try {
             const { data } = await Axios.get("/api/users");
-            console.log(data);
             dispatch(setUsers(data));
         } catch (err) {
             console.log(err);

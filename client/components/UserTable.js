@@ -15,7 +15,6 @@ class UserTable extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <MaterialTable
                 title={"User Table"}
