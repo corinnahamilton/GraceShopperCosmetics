@@ -34,16 +34,19 @@ export const getCartProductThunk = (cartId) => async (dispatch) => {
       },
     });
     dispatch(getCartProduct(cartProducts));
-    // console.log(data)
+   
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addQuantityThunk = (userId, productId) => async (dispatch) => {
+export const addQuantityThunk = (productId) => async (dispatch) => {
   try {
+    const token = window.localStorage.getItem('token');
     const { data } = await Axios.put(
-      `/api/cart/plusOne/${userId}/${productId}`
+      `/api/cart/plusOne/${productId}`,{
+        authorization: token,
+      }
     );
     dispatch(addQuantity(data));
     // console.log("data", data);
@@ -52,10 +55,13 @@ export const addQuantityThunk = (userId, productId) => async (dispatch) => {
   }
 };
 
-export const subQuantityThunk = (userId, productId) => async (dispatch) => {
+export const subQuantityThunk = ( productId) => async (dispatch) => {
   try {
+    const token = window.localStorage.getItem('token');
     const { data } = await Axios.put(
-      `/api/cart/minusOne/${userId}/${productId}`
+      `/api/cart/minusOne/${productId}`,{
+        authorization: token,
+      }
     );
     dispatch(subtractQuantity(data));
     // console.log("data", data);

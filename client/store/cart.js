@@ -47,15 +47,15 @@ export const addToCartThunk = (productId) => async (dispatch) => {
     console.log(error);
   }
 };
-// needs to be rewriten
-// export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
-//   try {
-//     await Axios.delete(`/api/cart/${cartId}/${productId}`);
-//     dispatch(deleteFromCart(productId));
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+
+export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
+  try {
+    await Axios.delete(`/api/cart/${cartId}/${productId}`);
+    dispatch(deleteFromCart(productId));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
@@ -63,13 +63,13 @@ export default function cartReducer(state = { products: [] }, action) {
       return action.cart;
     case ADD_TO_CART:
       return action.cart;
-    // case DELETE_FROM_CART:
-    //   return {
-    //     ...state,
-    //     products: state.products.filter(
-    //       (product) => product.id !== action.productId
-    //     ),
-    //   };
+    case DELETE_FROM_CART:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.productId
+        ),
+      };
 
     default:
       return state;

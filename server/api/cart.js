@@ -57,12 +57,13 @@ router.post('/:productId', async (req, res, next) => {
 });
 
 //update a single product's quantity
-/* router.put('/plusOne/:userId/:productId', async (req, res, next) => {
+ router.put('/plusOne/:productId', async (req, res, next) => {
   try {
+    const user = await User.findByToken(req.body.authorization);
     const product = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
       where: {
-        userId: req.params.userId,
+        userId: user.id,
       },
       include: Product,
     });
@@ -81,12 +82,13 @@ router.post('/:productId', async (req, res, next) => {
   }
 });
 
-router.put('/minusOne/:userId/:productId', async (req, res, next) => {
+router.put('/minusOne/:productId', async (req, res, next) => {
   try {
+    const user = await User.findByToken(req.body.authorization);
     const product = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
       where: {
-        userId: req.params.userId,
+        userId: user.id,
       },
       include: Product,
     });
@@ -131,7 +133,7 @@ router.delete('/:cartId/:productId', async (req, res, next) => {
     next(err);
   }
 });
-*/
+
 
 //get specific product in cart to retrieve quantity
 router.get('/:cartId', async (req, res, next) => {
@@ -148,7 +150,7 @@ router.get('/:cartId', async (req, res, next) => {
         cartId: cart.id,
       },
     });
-    // console.log(cartProduct)
+
     res.send(cartProduct);
   } catch (error) {
     next(error);

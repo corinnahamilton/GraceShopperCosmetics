@@ -101,10 +101,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),
-  /*deleteFromCart: (cartId, productId) =>
+  deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-  getCartProduct: (userId, cartId) =>
-    dispatch(getCartProductThunk(userId, cartId)), */
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
