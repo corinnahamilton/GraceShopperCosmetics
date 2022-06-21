@@ -13,7 +13,6 @@ class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
-    const { userId } = this.props.match.params;
     this.props.getCart();
   }
 
@@ -46,6 +45,7 @@ class Cart extends React.Component {
 
   render() {
     const cartProducts = this.props.products;
+    console.log('CARTPRODUCTS', cartProducts);
 
     return (
       <div>
@@ -54,6 +54,7 @@ class Cart extends React.Component {
             <h1>My Cart</h1>
             <div>
               {cartProducts.map((product) => {
+                console.log('PRODUCT', product);
                 return (
                   <div key={product.id}>
                     <span>
@@ -87,12 +88,15 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  products: state.cartReducer.products,
-  user: state.user,
-  cart: state.cartReducer,
-  cartProduct: state.cartProductReducer,
-});
+const mapStateToProps = (state) => {
+  console.log('STATE', state);
+  return {
+    products: state.cartReducer.products,
+    user: state.user,
+    cart: state.cartReducer,
+    cartProduct: state.cartProductReducer,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),

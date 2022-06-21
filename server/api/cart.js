@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
       },
       include: Product,
     });
-    res.send(cart);
+    res.send(cart[0]);
   } catch (error) {
     next(error);
   }
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:productId', async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
+    const user = await User.findByToken(req.body.authorization);
     const product = await Product.findByPk(req.params.productId);
     //find user's uncompleted cart associated to their id
     const [cart, created] = await Cart.findOrCreate({

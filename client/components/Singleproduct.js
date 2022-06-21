@@ -16,7 +16,6 @@ class SingleProduct extends React.Component {
 
   handleClick(event) {
     const productId = event.target.value;
-    const userId = 1;
     this.props.addToCart(productId);
   }
 

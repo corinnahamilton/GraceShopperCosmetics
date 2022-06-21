@@ -11,9 +11,9 @@ const getCart = (cart) => {
   };
 };
 
-const addToCart = (data) => ({
+const addToCart = (cart) => ({
   type: ADD_TO_CART,
-  data,
+  cart,
 });
 
 const deleteFromCart = (productId) => ({
@@ -39,12 +39,10 @@ export const getCartThunk = () => async (dispatch) => {
 export const addToCartThunk = (productId) => async (dispatch) => {
   try {
     let token = window.localStorage.getItem('token');
-    const { data } = await Axios.post(`/api/cart/${productId}`, {
-      headers: {
-        authorization: token,
-      },
+    const { data: cart } = await Axios.post(`/api/cart/${productId}`, {
+      authorization: token,
     });
-    dispatch(addToCart(data));
+    dispatch(addToCart(cart));
   } catch (error) {
     console.log(error);
   }
@@ -62,9 +60,10 @@ export const addToCartThunk = (productId) => async (dispatch) => {
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
     case GET_CART:
+      console.log('GET_CART', action.cart);
       return action.cart;
     case ADD_TO_CART:
-      return { ...state, products: [...state.products, action.product] };
+      return action.cart;
     // case DELETE_FROM_CART:
     //   return {
     //     ...state,
