@@ -27,7 +27,7 @@ class EditCart extends React.Component {
   }
 
   render() {
-    console.log('cartProduct', this.props.cartProduct);
+    
     return (
       <div>
         <button onClick={this.handleAdd}> + </button>

@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFromCartThunk, getCartThunk } from '../store/cart';
-import { getCartProductThunk } from '../store/cartProduct';
+import { Link } from 'react-router-dom';
+import { deleteFromCartThunk, getCartThunk,checkoutCartThunk } from '../store/cart';
 import EditCart from './EditCart';
+
 
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
       total: 0,
+      slogan:''
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.props.getCart();
@@ -18,6 +21,11 @@ class Cart extends React.Component {
 
   handleClick(cartId, productId) {
     this.props.deleteFromCart(cartId, productId);
+  }
+  handleSubmit(cartId) {
+    this.props.checkoutCart(cartId);
+    this.setState({ slogan: 'Thanks' });
+    // this.props.getCart();
   }
 
   componentDidUpdate(prevProps) {
@@ -73,7 +81,6 @@ class Cart extends React.Component {
                     </button>
                     <EditCart
                       productId={product.id}
-                      userId={1}
                       cartId={this.props.cart.id}
                     />
                   </div>
@@ -81,6 +88,11 @@ class Cart extends React.Component {
               })}
             </div>
             <h3>Total Price: ${this.state.total}</h3>
+            <Link to={`/cart/checkout/${this.props.cart.id}`}>
+              <button onClick={()=>this.handleSubmit(this.props.cart.id)}>
+                Checkout
+              </button>
+            </Link>
           </div>
         ) : (
           <h1>Your Cart is Empty!</h1>
@@ -103,7 +115,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-
+  checkoutCart: (cartId)=>dispatch(checkoutCartThunk(cartId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
