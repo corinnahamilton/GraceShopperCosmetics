@@ -25,9 +25,9 @@ const images = [
 
 const ImageSlider = () => {
     return (
-        <div>
+        <div class="slides_container">
             <SimpleImageSlider
-                width={1024}
+                width={1280}
                 height={740}
                 images={images}
                 showBullets={true}
