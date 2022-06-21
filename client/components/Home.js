@@ -38,11 +38,11 @@ const ImageSlider = () => {
 };
 
 export const Home = (props) => {
-  const { email } = props;
+  const { name } = props;
 
   return (
     <div>
-      <h1>Welcome {email}!</h1>
+      <h1>Welcome {name}</h1>
       <ImageSlider />
     </div>
   );
@@ -50,7 +50,7 @@ export const Home = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    email: state.auth.email,
+    name: state.auth.name,
   };
 };
 
