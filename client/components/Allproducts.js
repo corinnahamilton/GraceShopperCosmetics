@@ -1,7 +1,7 @@
-import React from 'react';
-import { fetchProducts } from '../store/products';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { fetchProducts } from "../store/products";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class AllProducts extends React.Component {
           return (
             <div key={product.id}>
               <Link to={`/products/${product.id}`}>
-                <img src={product.imageURL} width='164' />
+                <img src={product.imageURL} width="164" />
               </Link>
               <p>{product.brandName}</p>
               <Link to={`/products/${product.id}`}>
