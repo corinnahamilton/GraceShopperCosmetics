@@ -131,13 +131,15 @@ router.delete('/:cartId/:productId', async (req, res, next) => {
     next(err);
   }
 });
+*/
 
 //get specific product in cart to retrieve quantity
-router.get('/:userId/:cartId', async (req, res, next) => {
+router.get('/:cartId', async (req, res, next) => {
   try {
+    const user = await User.findByToken(req.headers.authorization);
     const cart = await Cart.findOne({
       where: {
-        userId: req.params.userId,
+        userId: user.id,
         isCompleted: false,
       },
     });
@@ -151,4 +153,4 @@ router.get('/:userId/:cartId', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}); */
+});

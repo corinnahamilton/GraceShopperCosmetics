@@ -71,7 +71,11 @@ class Cart extends React.Component {
                     >
                       Remove
                     </button>
-                    {/* <EditCart productId={product.id} userId={1} cartId={this.props.cart.id} /> */}
+                    <EditCart
+                      productId={product.id}
+                      userId={1}
+                      cartId={this.props.cart.id}
+                    />
                   </div>
                 );
               })}

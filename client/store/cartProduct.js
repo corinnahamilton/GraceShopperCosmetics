@@ -1,8 +1,8 @@
-import Axios from "axios";
+import Axios from 'axios';
 
-const GET_CART_PRODUCT = "GET_CART_PRODUCT";
-const SUB_QUANTITY = 'SUB_QUANTITY'
-const ADD_QUANTITY = 'ADD_QUANTITY'
+const GET_CART_PRODUCT = 'GET_CART_PRODUCT';
+const SUB_QUANTITY = 'SUB_QUANTITY';
+const ADD_QUANTITY = 'ADD_QUANTITY';
 
 const getCartProduct = (cartProduct) => {
   return {
@@ -10,34 +10,41 @@ const getCartProduct = (cartProduct) => {
     cartProduct,
   };
 };
-export const subtractQuantity = product => {
+export const subtractQuantity = (product) => {
   return {
     type: SUB_QUANTITY,
-    product
-  }
-}
+    product,
+  };
+};
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const addQuantity = product => {
+export const addQuantity = (product) => {
   return {
     type: ADD_QUANTITY,
-    product
-  }
-}
+    product,
+  };
+};
 
-export const getCartProductThunk = (userId,cartId) => async (dispatch) => {
+export const getCartProductThunk = (cartId) => async (dispatch) => {
   try {
-    const {data} = await Axios.get(`/api/cart/${userId}/${cartId}`);
-    dispatch(getCartProduct(data));
+    const token = window.localStorage.getItem('token');
+    const { data: cartProducts } = await Axios.get(`/api/cart/${cartId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch(getCartProduct(cartProducts));
     // console.log(data)
-
   } catch (error) {
     console.log(error);
   }
 };
+
 export const addQuantityThunk = (userId, productId) => async (dispatch) => {
   try {
-    const { data } = await Axios.put(`/api/cart/plusOne/${userId}/${productId}`);
+    const { data } = await Axios.put(
+      `/api/cart/plusOne/${userId}/${productId}`
+    );
     dispatch(addQuantity(data));
     // console.log("data", data);
   } catch (error) {
@@ -47,7 +54,9 @@ export const addQuantityThunk = (userId, productId) => async (dispatch) => {
 
 export const subQuantityThunk = (userId, productId) => async (dispatch) => {
   try {
-    const { data } = await Axios.put(`/api/cart/minusOne/${userId}/${productId}`)
+    const { data } = await Axios.put(
+      `/api/cart/minusOne/${userId}/${productId}`
+    );
     dispatch(subtractQuantity(data));
     // console.log("data", data);
   } catch (error) {
@@ -55,25 +64,24 @@ export const subQuantityThunk = (userId, productId) => async (dispatch) => {
   }
 };
 
-
 export default function cartProductReducer(state = [], action) {
   switch (action.type) {
     case GET_CART_PRODUCT:
       return action.cartProduct;
     case ADD_QUANTITY:
-      return state.map((product)=>{ 
-        if(product.productId===action.product.productId){
-           product.quantity=action.product.quantity
+      return state.map((product) => {
+        if (product.productId === action.product.productId) {
+          product.quantity = action.product.quantity;
         }
-        return product
-       }  )
+        return product;
+      });
     case SUB_QUANTITY:
-      return state.map((product)=>{ 
-        if(product.productId===action.product.productId){
-           product.quantity=action.product.quantity
+      return state.map((product) => {
+        if (product.productId === action.product.productId) {
+          product.quantity = action.product.quantity;
         }
-        return product
-       }  )
+        return product;
+      });
     default:
       return state;
   }

@@ -10,13 +10,12 @@ class EditCart extends React.Component {
     this.handleSub = this.handleSub.bind(this);
   }
   componentDidMount() {
-    this.props.getCartProduct(this.props.userId, this.props.cartId);
+    this.props.getCartProduct(this.props.cartId);
   }
 
   handleAdd() {
-    const userId = this.props.userId;
     const productId = this.props.productId;
-
+    const userId = this.props.userId;
     this.props.addQuantity(userId, productId);
   }
 
@@ -28,11 +27,11 @@ class EditCart extends React.Component {
   }
 
   render() {
-    //  console.log('cartProduct',this.props.cartProduct)
+    console.log('cartProduct', this.props.cartProduct);
     return (
       <div>
         <button onClick={this.handleAdd}> + </button>
-        {this.props.cartProduct ? (
+        {this.props.cartProduct.length > 0 ? (
           <div>
             {this.props.cartProduct.map((product) => {
               if (
@@ -60,8 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCartProduct: (userId, cartId) =>
-    dispatch(getCartProductThunk(userId, cartId)),
+  getCartProduct: (cartId) => dispatch(getCartProductThunk(cartId)),
   addQuantity: (userId, productId) =>
     dispatch(addQuantityThunk(userId, productId)),
   subQuantity: (userId, productId) =>
