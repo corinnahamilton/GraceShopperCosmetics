@@ -36,7 +36,7 @@ class Routes extends Component {
                         <Route path="/signup" component={CreateUser} />
                         <Route exact path="/products" component={AllProducts} />
                         <Route exact path="/cart/:userId" component={Cart} />
-                        <Route exact path="/admin" component={Admin} />
+                        <Route exact path="/login/admin" component={Admin} />
                         <Route
                             exact
                             path="/products/:id"
@@ -75,6 +75,7 @@ const mapStateToProps = (state) => {
     return {
         // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
         // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+        // if id exist, isLoggedIn is true; otherwise, false
         isLoggedIn: !!state.auth.id,
     };
 };
