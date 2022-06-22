@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function Checkout() {
   return (
-    <h1>Thank You for Shopping with us!</h1>
-  )
+    <div id="announcement">
+      <h1 id="announcementText">Thank you for shopping with us!</h1>;
+    </div>
+  );
 }
 
-export default Checkout
+export default Checkout;

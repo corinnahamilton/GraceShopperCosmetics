@@ -119,3 +119,13 @@ nav#navbar {
   background-color: #aeaeae;
   color: white;
 }
+
+#announcement {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+
+#announcementText {
+  color: #6d6c6c;
+}
