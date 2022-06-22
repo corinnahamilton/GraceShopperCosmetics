@@ -57,20 +57,32 @@ class Cart extends React.Component {
     const cartProducts = this.props.products;
 
     return (
-      <div id="cartContainer">
+      <div class=" max-w-7xl mx-auto my-7 text-center">
         {cartProducts ? (
           <div>
-            <div>
+            <h1 class="font-serif font-bold text-2xl mt-6 md:mt-0 text-center">
+              My Cart
+            </h1>
+            <div class=" grid  content-center">
               {cartProducts.map((product) => {
                 return (
-                  <div id="cartItem" key={product.id}>
+                  <div
+                    key={product.id}
+                    class="relative max-w-7xl mx-auto my-7 content-center"
+                  >
                     <Wrapper>
-                      <img src={product.imageURL} width="120" />
+                      <img
+                        src={product.imageURL}
+                        width="120"
+                        class="h-fit object-cover rounded-lg content-center"
+                      />
                       <h3>
-                        <span>
+                        <span class="font-sans text-base text-left font-bold italic ">
                           {product.brandName} {product.productName}{" "}
                         </span>
-                        <span>${product.price}</span>
+                        <span class="font-serif font-bold text-2xl mt-6 md:mt-0 ">
+                          ${product.price}
+                        </span>
 
                         <Button
                           size="medium"
@@ -94,25 +106,28 @@ class Cart extends React.Component {
                 );
               })}
             </div>
-            <div id="totalCheckOutContainer">
-              <div id="totalCheckOut">
-                <h3>Total Price: ${this.state.total}</h3>
-                <Link to={`/cart/checkout/${this.props.cart.id}`}>
-                  <Button
-                    size="medium"
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => this.handleSubmit(this.props.cart.id)}
-                  >
-                    Checkout
-                  </Button>
-                </Link>
-              </div>
-            </div>
+            <h3 class="font-serif font-bold text-2xl mt-6 md:mt-0">
+              Total Price: ${this.state.total}
+            </h3>
+            <Link to={`/cart/checkout/${this.props.cart.id}`}>
+              <Button
+                size="medium"
+                variant="contained"
+                color="secondary"
+                onClick={() => this.handleSubmit(this.props.cart.id)}
+              >
+                Checkout
+              </Button>
+            </Link>
           </div>
         ) : (
           <div id="announcement">
-            <h1 id="announcementText">Your Cart is Empty!</h1>
+            <h1
+              id="announcementText"
+              class="font-serif font-bold text-2xl mt-6 md:mt-0"
+            >
+              Your Cart is Empty!
+            </h1>
           </div>
         )}
       </div>

@@ -14,33 +14,39 @@ class Nail extends React.Component {
         );
 
         return (
-            <div>
-                <h2>Nail</h2>
-                <div>
-                    {nailProducts.length ? (
+            <div class="relative max-w-7xl mx-auto">
+                <h2 class="text-2xl pt-1 font-sans">Nail Products</h2>
+                <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                    {nailProducts.length &&
                         nailProducts.map((product) => {
                             return (
-                                <div key={product.id}>
-                                    <Link to={`/products/${product.id}`}>
-                                        <img
-                                            src={product.imageURL}
-                                            width="164"
-                                        />
-                                    </Link>
+                                <div
+                                    key={product.id}
+                                    class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white"
+                                >
+                                    <div class="flex-shrink-0">
+                                        <Link to={`/products/${product.id}`}>
+                                            <img
+                                                src={product.imageURL}
+                                                class="h-fit w-full object-cover"
+                                            />
+                                        </Link>
+                                    </div>
+                                    <p class="pl-3 italic font-bold">
+                                        {product.brandName}
+                                    </p>
+                                    <div class="text-center">
+                                        <Link to={`/products/${product.id}`}>
+                                            <p class="font-bold text-lg">
+                                                {product.productName}
+                                            </p>
+                                        </Link>
 
-                                    <p>{product.brandName}</p>
-
-                                    <Link to={`/products/${product.id}`}>
-                                        <p>{product.productName}</p>
-                                    </Link>
-
-                                    <p>${product.price}</p>
+                                        <p>${product.price}</p>
+                                    </div>
                                 </div>
                             );
-                        })
-                    ) : (
-                        <h2>Nail products</h2>
-                    )}
+                        })}
                 </div>
             </div>
         );
