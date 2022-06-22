@@ -1,16 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { deleteFromCartThunk, getCartThunk,checkoutCartThunk } from '../store/cart';
-import EditCart from './EditCart';
-
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  deleteFromCartThunk,
+  getCartThunk,
+  checkoutCartThunk,
+} from "../store/cart";
+import EditCart from "./EditCart";
 
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
       total: 0,
-      slogan:''
+      slogan: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +27,7 @@ class Cart extends React.Component {
   }
   handleSubmit(cartId) {
     this.props.checkoutCart(cartId);
-    this.setState({ slogan: 'Thanks' });
+    this.setState({ slogan: "Thanks" });
     // this.props.getCart();
   }
 
@@ -64,14 +67,14 @@ class Cart extends React.Component {
                 return (
                   <div key={product.id}>
                     <span>
-                      <img src={product.imageURL} width='120' />
+                      <img src={product.imageURL} width="120" />
                     </span>
                     <span>
-                      {product.brandName} {product.productName}{' '}
+                      {product.brandName} {product.productName}{" "}
                     </span>
                     <span>${product.price}</span>
                     <button
-                      type='button'
+                      type="button"
                       value={product.id}
                       onClick={() =>
                         this.handleClick(this.props.cart.id, product.id)
@@ -89,13 +92,15 @@ class Cart extends React.Component {
             </div>
             <h3>Total Price: ${this.state.total}</h3>
             <Link to={`/cart/checkout/${this.props.cart.id}`}>
-              <button onClick={()=>this.handleSubmit(this.props.cart.id)}>
+              <button onClick={() => this.handleSubmit(this.props.cart.id)}>
                 Checkout
               </button>
             </Link>
           </div>
         ) : (
-          <h1>Your Cart is Empty!</h1>
+          <div id="announcement">
+            <h1 id="announcementText">Your Cart is Empty!</h1>
+          </div>
         )}
       </div>
     );
@@ -115,7 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-  checkoutCart: (cartId)=>dispatch(checkoutCartThunk(cartId))
+  checkoutCart: (cartId) => dispatch(checkoutCartThunk(cartId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
