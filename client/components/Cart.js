@@ -7,13 +7,14 @@ import {
   checkoutCartThunk,
 } from '../store/cart';
 import EditCart from './EditCart';
+import { Button } from '@material-ui/core';
+import { Wrapper } from './Cart.styles';
 
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
       total: 0,
-      slogan: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,8 +28,6 @@ class Cart extends React.Component {
   }
   handleSubmit(cartId) {
     this.props.checkoutCart(cartId);
-    this.setState({ slogan: 'Thanks' });
-    // this.props.getCart();
   }
 
   componentDidUpdate(prevProps) {
@@ -66,35 +65,46 @@ class Cart extends React.Component {
               {cartProducts.map((product) => {
                 return (
                   <div key={product.id}>
-                    <span>
+                    <Wrapper>
                       <img src={product.imageURL} width='120' />
-                    </span>
-                    <span>
-                      {product.brandName} {product.productName}{' '}
-                    </span>
-                    <span>${product.price}</span>
-                    <button
-                      type='button'
-                      value={product.id}
-                      onClick={() =>
-                        this.handleClick(this.props.cart.id, product.id)
-                      }
-                    >
-                      Remove
-                    </button>
-                    <EditCart
-                      productId={product.id}
-                      cartId={this.props.cart.id}
-                    />
+                      <h3>
+                        <span>
+                          {product.brandName} {product.productName}{' '}
+                        </span>
+                        <span>${product.price}</span>
+
+                        <Button
+                          size='medium'
+                          variant='contained'
+                          color='default'
+                          type='button'
+                          value={product.id}
+                          onClick={() =>
+                            this.handleClick(this.props.cart.id, product.id)
+                          }
+                        >
+                          Remove
+                        </Button>
+                      </h3>
+                      <EditCart
+                        productId={product.id}
+                        cartId={this.props.cart.id}
+                      />
+                    </Wrapper>
                   </div>
                 );
               })}
             </div>
             <h3>Total Price: ${this.state.total}</h3>
             <Link to={`/cart/checkout/${this.props.cart.id}`}>
-              <button onClick={() => this.handleSubmit(this.props.cart.id)}>
+              <Button
+                size='medium'
+                variant='contained'
+                color='secondary'
+                onClick={() => this.handleSubmit(this.props.cart.id)}
+              >
                 Checkout
-              </button>
+              </Button>
             </Link>
           </div>
         ) : (
