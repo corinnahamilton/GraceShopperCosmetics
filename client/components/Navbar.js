@@ -12,11 +12,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 <div>
                     {/* The navbar will show these links after you log in */}
                     <Link to="/">Home</Link>
-                    <Link to="/products">🛍️ All</Link>
-                    <Link to="/products/face">🧴 Face</Link>
-                    <Link to="/products/eye">👁️ Eye</Link>
-                    <Link to="/products/lip">🫦 Lip</Link>
-                    <Link to="/products/nail">💅🏻 Nail</Link>
+                    <Link to="/products">All</Link>
+                    <Link to="/products/face">Face</Link>
+                    <Link to="/products/eye">Eye</Link>
+                    <Link to="/products/lip">Lip</Link>
+                    <Link to="/products/nail">Nail</Link>
                     <Link to="/logout" onClick={handleClick}>
                         Log Out
                     </Link>
@@ -27,11 +27,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 <div>
                     {/* The navbar will show these links after you log out */}
                     <Link to="/">Home</Link>
-                    <Link to="/products">🛍️ All</Link>
-                    <Link to="/products/face">🧴 Face</Link>
-                    <Link to="/products/eye">👁️ Eye</Link>
-                    <Link to="/products/lip">🫦 Lip</Link>
-                    <Link to="/products/nail">💅🏻 Nail</Link>
+                    <Link to="/products">All</Link>
+                    <Link to="/products/face">Face</Link>
+                    <Link to="/products/eye">Eye</Link>
+                    <Link to="/products/lip">Lip</Link>
+                    <Link to="/products/nail">Nail</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/signup">Sign Up</Link>
                     <Link to="/cart/${userId}">🛒 Cart</Link>
