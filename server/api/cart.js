@@ -13,11 +13,30 @@ router.get('/', async (req, res, next) => {
       },
       include: Product,
     });
+    // console.log(Cart.prototype)
     res.send(cart[0]);
   } catch (error) {
     next(error);
   }
 });
+
+router.get('/checkout/:cartId', async (req, res, next) => {
+  try {
+    const cart = await Cart.findOne({
+      where: {
+        id: req.params.cartId,
+      },
+      include: Product,
+    });
+   
+    await cart.update({isCompleted: true})
+
+    res.send('Thank you for shopping with us!');
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 router.post('/:productId', async (req, res, next) => {
   try {
@@ -25,10 +44,12 @@ router.post('/:productId', async (req, res, next) => {
     const product = await Product.findByPk(req.params.productId);
     //find user's uncompleted cart associated to their id
     const [cart, created] = await Cart.findOrCreate({
-      where: { userId: user.id },
-      isCompleted: false,
+      where: { 
+        userId: user.id ,
+        isCompleted: false
+    },
       include: Product,
-    });
+  });
     //
     const cartProduct = await CartProduct.findOne({
       where: {
@@ -64,6 +85,7 @@ router.post('/:productId', async (req, res, next) => {
     const cart = await Cart.findOne({
       where: {
         userId: user.id,
+        isCompleted: false
       },
       include: Product,
     });
@@ -89,6 +111,7 @@ router.put('/minusOne/:productId', async (req, res, next) => {
     const cart = await Cart.findOne({
       where: {
         userId: user.id,
+        isCompleted: false
       },
       include: Product,
     });
