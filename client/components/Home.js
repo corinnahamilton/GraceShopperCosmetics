@@ -25,7 +25,7 @@ const images = [
 
 const ImageSlider = () => {
   return (
-    <div class="slides_container">
+    <div>
       <SimpleImageSlider
         width={1280}
         height={740}
@@ -39,17 +39,24 @@ const ImageSlider = () => {
 
 export const Home = (props) => {
   const { email } = props;
+  console.log(email);
+
   return (
     <div>
-      <h1 id="welcome">Welcome {email}!</h1>
-      <ImageSlider />
+      <div id="welcomeContainer">
+        <h1 id="welcome">Welcome {email}</h1>
+      </div>
+      <div id="slidesContainer">
+        <ImageSlider />
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    email: state.auth.email,
+    name: state.auth.name,
+    isLoggedIn: !!state.auth.id,
   };
 };
 

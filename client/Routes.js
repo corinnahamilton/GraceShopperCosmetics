@@ -11,6 +11,7 @@ import Face from "./components/Face";
 import Lip from "./components/Lip";
 import Nail from "./components/Nail";
 import CreateUser from "./components/CreateUser";
+import Checkout from "./components/Checkout";
 import { me } from "./store/auth";
 import Admin from "./components/Admin";
 
@@ -38,6 +39,7 @@ class Routes extends Component {
             <Route exact path="/signup" component={CreateUser} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/cart/checkout/:cartId" component={Checkout} />
 
             {isAdmin && <Route exact path="/login/admin" component={Admin} />}
 

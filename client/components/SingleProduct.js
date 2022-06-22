@@ -21,14 +21,14 @@ class SingleProduct extends React.Component {
 
   render() {
     const product = this.props.product;
-    //add to cart button and functionality needed
+   
     return (
       <div>
         <h3>{product.productType}</h3>
         <h2>{product.brandName}</h2>
         <h1>{product.productName}</h1>
         <h4>{product.description}</h4>
-        <h2>{product.price}</h2>
+        <h2>${product.price}</h2>
         <h2>
           <img src={product.imageURL} width="200" />
         </h2>

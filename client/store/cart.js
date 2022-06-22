@@ -3,6 +3,7 @@ import Axios from 'axios';
 const GET_CART = 'GET_CART';
 const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_FROM_CART = 'DELETE_FROM_CART';
+const CHECKOUT_CART ='CHECKOUT_CART'
 
 const getCart = (cart) => {
   return {
@@ -19,6 +20,10 @@ const addToCart = (cart) => ({
 const deleteFromCart = (productId) => ({
   type: DELETE_FROM_CART,
   productId,
+});
+const checkoutCart = (cartId) => ({
+  type: CHECKOUT_CART,
+  cartId,
 });
 
 //with token
@@ -56,6 +61,16 @@ export const deleteFromCartThunk = (cartId, productId) => async (dispatch) => {
     console.log(error);
   }
 };
+export const checkoutCartThunk = (cartId) => async (dispatch) => {
+  try {
+    await Axios.get(`/api/cart/checkout/${cartId}`);
+    // console.log(data)
+    dispatch(checkoutCart(cartId));
+   
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default function cartReducer(state = { products: [] }, action) {
   switch (action.type) {
@@ -70,6 +85,8 @@ export default function cartReducer(state = { products: [] }, action) {
           (product) => product.id !== action.productId
         ),
       };
+    case CHECKOUT_CART:
+      return {...state, isCompleted: true }
 
     default:
       return state;
