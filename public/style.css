@@ -129,3 +129,29 @@ nav#navbar {
 #announcementText {
   color: #6d6c6c;
 }
+
+#cartContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#cartItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+#totalCheckOut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 250px;
+}
+
+#totalCheckOutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
