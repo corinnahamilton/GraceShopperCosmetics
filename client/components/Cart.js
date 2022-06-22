@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteFromCartThunk, getCartThunk,checkoutCartThunk } from '../store/cart';
 import EditCart from './EditCart';
+import { Button } from "@material-ui/core";
+import { Wrapper } from "./Cart.styles";
 
 
 class Cart extends React.Component {
@@ -55,6 +57,7 @@ class Cart extends React.Component {
     const cartProducts = this.props.products;
 
     return (
+     
       <div>
         {cartProducts ? (
           <div>
@@ -63,14 +66,20 @@ class Cart extends React.Component {
               {cartProducts.map((product) => {
                 return (
                   <div key={product.id}>
-                    <span>
-                      <img src={product.imageURL} width='120' />
-                    </span>
+                  <Wrapper>
+                    
+                    
+                    <img src={product.imageURL} width='120' />
+                    <h3>
                     <span>
                       {product.brandName} {product.productName}{' '}
                     </span>
                     <span>${product.price}</span>
-                    <button
+                    
+                    <Button
+                      size="medium"
+                      variant="contained"
+                      color='default'
                       type='button'
                       value={product.id}
                       onClick={() =>
@@ -78,20 +87,26 @@ class Cart extends React.Component {
                       }
                     >
                       Remove
-                    </button>
+                    </Button>
+                    </h3>
                     <EditCart
                       productId={product.id}
                       cartId={this.props.cart.id}
                     />
+                    </Wrapper>
                   </div>
                 );
               })}
             </div>
             <h3>Total Price: ${this.state.total}</h3>
             <Link to={`/cart/checkout/${this.props.cart.id}`}>
-              <button onClick={()=>this.handleSubmit(this.props.cart.id)}>
+              <Button 
+               size='medium'
+               variant="contained"
+               color='secondary'
+              onClick={()=>this.handleSubmit(this.props.cart.id)}>
                 Checkout
-              </button>
+              </Button>
             </Link>
           </div>
         ) : (

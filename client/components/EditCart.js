@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getCartProductThunk } from '../store/cartProduct';
 import { addQuantityThunk, subQuantityThunk } from '../store/cartProduct';
+import { Button } from "@material-ui/core";
+import { Wrapper } from "./Cartitem.styles";
 
 class EditCart extends React.Component {
   constructor() {
@@ -29,27 +31,40 @@ class EditCart extends React.Component {
   render() {
     
     return (
-      <div>
-        <button onClick={this.handleAdd}> + </button>
+      <Wrapper>
+      <div >
+        <span>
+        <Button 
+               size='medium'
+               variant="contained"
+               color='default' onClick={this.handleAdd}> + </Button>
+        </span>
         {this.props.cartProduct.length > 0 ? (
-          <div>
+          
+          <span>
             {this.props.cartProduct.map((product) => {
               if (
                 parseInt(product.productId) === parseInt(this.props.productId)
               ) {
                 return (
                   <div key={product.productId}>
-                    <span>Qty:{product.quantity}</span>
+                    <h3 >Qty:{product.quantity}</h3>
                   </div>
                 );
               }
             })}
-          </div>
+          </span>
         ) : (
           <p>-</p>
         )}
-        <button onClick={this.handleSub}> - </button>
+      <span>
+        <Button 
+               size='medium'
+               variant="contained"
+               color='default' onClick={this.handleSub}> - </Button>
+      </span>
       </div>
+      </Wrapper>
     );
   }
 }
