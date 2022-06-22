@@ -1,19 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   deleteFromCartThunk,
   getCartThunk,
   checkoutCartThunk,
-} from "../store/cart";
-import EditCart from "./EditCart";
+} from '../store/cart';
+import EditCart from './EditCart';
 
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
       total: 0,
-      slogan: "",
+      slogan: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +27,7 @@ class Cart extends React.Component {
   }
   handleSubmit(cartId) {
     this.props.checkoutCart(cartId);
-    this.setState({ slogan: "Thanks" });
+    this.setState({ slogan: 'Thanks' });
     // this.props.getCart();
   }
 
@@ -67,14 +67,14 @@ class Cart extends React.Component {
                 return (
                   <div key={product.id}>
                     <span>
-                      <img src={product.imageURL} width="120" />
+                      <img src={product.imageURL} width='120' />
                     </span>
                     <span>
-                      {product.brandName} {product.productName}{" "}
+                      {product.brandName} {product.productName}{' '}
                     </span>
                     <span>${product.price}</span>
                     <button
-                      type="button"
+                      type='button'
                       value={product.id}
                       onClick={() =>
                         this.handleClick(this.props.cart.id, product.id)
@@ -98,8 +98,8 @@ class Cart extends React.Component {
             </Link>
           </div>
         ) : (
-          <div id="announcement">
-            <h1 id="announcementText">Your Cart is Empty!</h1>
+          <div id='announcement'>
+            <h1 id='announcementText'>Your Cart is Empty!</h1>
           </div>
         )}
       </div>
@@ -113,6 +113,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     cart: state.cartReducer,
     cartProduct: state.cartProductReducer,
+    isLoggedIn: !!state.auth.id,
   };
 };
 
