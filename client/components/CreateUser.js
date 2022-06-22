@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createUser } from '../store/createUser';
+import React from "react";
+import { connect } from "react-redux";
+import { createUser } from "../store/createUser";
 
 // this is our Signup component
 export class CreateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      name: '',
-      password: '', // ???
+      email: "",
+      name: "",
+      password: "", // ???
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,51 +28,58 @@ export class CreateUser extends React.Component {
       this.props.createUser(this.state);
     } catch (error) {
       this.setState({
-        email: '',
-        name: '',
-        password: '',
+        email: "",
+        name: "",
+        password: "",
       });
     }
   }
   render() {
     return (
-      <div>
+      <div className="form">
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor='email'>
-              <p>Email</p>
-            </label>
-            <input
-              type='text'
-              name='email'
-              onChange={this.handleChange}
-              value={this.state.email}
-            />
-          </div>
-          <div>
-            <label htmlFor='name'>
-              <p>First Name</p>
-            </label>
-            <input
-              type='name'
-              name='name'
-              onChange={this.handleChange}
-              value={this.state.name}
-            />
-          </div>
-          <div>
-            <label htmlFor='password'>
-              <p>Password</p>
-            </label>
-            <input
-              type='password'
-              name='password'
-              onChange={this.handleChange}
-              value={this.state.password}
-            />
-          </div>
-          <div>
-            <button type='submit'>Submit</button>
+          <div className="formContainer">
+            <div className="secondFormContainer">
+              <label className="labelName" htmlFor="email">
+                <p>Email</p>
+              </label>
+              <input
+                className="input"
+                type="text"
+                name="email"
+                onChange={this.handleChange}
+                value={this.state.email}
+              />
+            </div>
+            <div className="secondFormContainer">
+              <label className="labelName" htmlFor="name">
+                <p>First Name</p>
+              </label>
+              <input
+                className="input"
+                type="name"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
+            </div>
+            <div className="secondFormContainer">
+              <label htmlFor="password" className="labelName">
+                <p>Password</p>
+              </label>
+              <input
+                className="input"
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+                value={this.state.password}
+              />
+            </div>
+            <div>
+              <button className="button" type="submit">
+                Submit
+              </button>
+            </div>
           </div>
         </form>
       </div>
