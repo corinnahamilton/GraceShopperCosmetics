@@ -6,7 +6,6 @@ import EditCart from './EditCart';
 import { Button } from "@material-ui/core";
 import { Wrapper } from "./Cart.styles";
 
-
 class Cart extends React.Component {
   constructor() {
     super();
@@ -107,8 +106,8 @@ class Cart extends React.Component {
             </Link>
           </div>
         ) : (
-          <div id="announcement">
-            <h1 id="announcementText">Your Cart is Empty!</h1>
+          <div id='announcement'>
+            <h1 id='announcementText'>Your Cart is Empty!</h1>
           </div>
         )}
       </div>
