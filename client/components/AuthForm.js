@@ -4,30 +4,35 @@ import { authenticate } from "../store";
 
 //this is our Login component
 const AuthForm = (props) => {
-    const { name, displayName, handleSubmit, error } = props;
+  const { name, displayName, handleSubmit, error } = props;
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit} name={name}>
-                <div>
-                    <label htmlFor="email">
-                        <p>Email</p>
-                    </label>
-                    <input name="email" type="text" />
-                </div>
-                <div>
-                    <label htmlFor="password">
-                        <p>Password</p>
-                    </label>
-                    <input name="password" type="password" />
-                </div>
-                <div>
-                    <button type="submit">{displayName}</button>
-                </div>
-                {error && error.response && <div> {error.response.data} </div>}
-            </form>
+  return (
+    <div className="form">
+      <form onSubmit={handleSubmit} name={name}>
+        <div className="formContainer">
+          <div className="secondFormContainer">
+            <label className="labelName" htmlFor="email">
+              <p>Email</p>
+            </label>
+            <input className="input" name="email" type="text" />
+          </div>
+          <div className="secondFormContainer">
+            <label className="labelName" htmlFor="password">
+              <p>Password</p>
+            </label>
+            <input className="input" name="password" type="password" />
+          </div>
+          <div>
+            <button className="button" type="submit">
+              {displayName}
+            </button>
+          </div>
         </div>
-    );
+
+        {error && error.response && <div> {error.response.data} </div>}
+      </form>
+    </div>
+  );
 };
 
 /**
@@ -38,11 +43,11 @@ const AuthForm = (props) => {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 const mapLogin = (state) => {
-    return {
-        name: "login",
-        displayName: "Login",
-        error: state.auth.error,
-    };
+  return {
+    name: "login",
+    displayName: "Login",
+    error: state.auth.error,
+  };
 };
 
 // const mapSignup = (state) => {
@@ -54,15 +59,15 @@ const mapLogin = (state) => {
 // };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        handleSubmit(evt) {
-            evt.preventDefault();
-            const formName = evt.target.name;
-            const email = evt.target.email.value;
-            const password = evt.target.password.value;
-            dispatch(authenticate(email, password, formName));
-        },
-    };
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      dispatch(authenticate(email, password, formName));
+    },
+  };
 };
 
 export const Login = connect(mapLogin, mapDispatchToProps)(AuthForm);
