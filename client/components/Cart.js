@@ -55,11 +55,11 @@ class Cart extends React.Component {
 
     return (
      
-      <div class="relative max-w-7xl mx-auto my-7 text-center content-around">
+      <div class=" max-w-7xl mx-auto my-7 text-center">
         {cartProducts ? (
           <div >
             <h1 class="font-serif font-bold text-2xl mt-6 md:mt-0 text-center">My Cart</h1>
-            <div class=" h-56 grid grid-cols-1 gap-4 content-center">
+            <div class=" grid  content-center">
               {cartProducts.map((product) => {
                 return (
                   <div key={product.id} class="relative max-w-7xl mx-auto my-7 content-center">
@@ -68,10 +68,10 @@ class Cart extends React.Component {
                     
                     <img src={product.imageURL} width='120' class="h-fit object-cover rounded-lg content-center"/>
                     <h3>
-                    <span class="font-sans text-base text-left font-bold italic content-around">
+                    <span class="font-sans text-base text-left font-bold italic ">
                       {product.brandName} {product.productName}{" "}
                     </span>
-                    <span class="font-serif font-bold text-2xl mt-6 md:mt-0 content-around">${product.price}</span>
+                    <span class="font-serif font-bold text-2xl mt-6 md:mt-0 ">${product.price}</span>
                     
                     <Button
                       size="medium"
