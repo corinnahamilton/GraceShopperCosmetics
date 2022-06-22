@@ -44,6 +44,7 @@ export const Home = (props) => {
     <div>
       {isLoggedIn ? (
         <div>
+          <br />
           <div className='welcomeContainer'>
             <h1 className='welcome'>Welcome, {name}!</h1>
           </div>
@@ -54,6 +55,7 @@ export const Home = (props) => {
       ) : (
         <div>
           <div className='welcomeContainer'>
+            <br />
             <h1 className='welcome'>Welcome!</h1>
           </div>
           <div className='slidesContainer'>
