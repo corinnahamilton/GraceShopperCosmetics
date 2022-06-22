@@ -12,7 +12,6 @@ class Cart extends React.Component {
     super();
     this.state = {
       total: 0,
-      slogan: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,8 +25,6 @@ class Cart extends React.Component {
   }
   handleSubmit(cartId) {
     this.props.checkoutCart(cartId);
-    this.setState({ slogan: "Thanks" });
-    // this.props.getCart();
   }
 
   componentDidUpdate(prevProps) {
