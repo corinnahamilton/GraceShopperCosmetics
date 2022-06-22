@@ -31,8 +31,9 @@ class EditCart extends React.Component {
   render() {
     
     return (
+
       <Wrapper>
-      <div >
+      <div class="relative max-w-7xl  my-2 flex-shrink-2 content-around ">
         <span>
         <Button 
                size='medium'
@@ -41,14 +42,14 @@ class EditCart extends React.Component {
         </span>
         {this.props.cartProduct.length > 0 ? (
           
-          <span>
+          <span class="font-serif text-2xl mt-6 md:mt-0 ">
             {this.props.cartProduct.map((product) => {
               if (
                 parseInt(product.productId) === parseInt(this.props.productId)
               ) {
                 return (
                   <div key={product.productId}>
-                    <h3 >Qty:{product.quantity}</h3>
+                    <h3 class="font-serif font-medium text-2xl mt-6 md:mt-0">Qty:{product.quantity}</h3>
                   </div>
                 );
               }

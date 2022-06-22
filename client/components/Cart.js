@@ -32,19 +32,20 @@ class Cart extends React.Component {
       const qty = this.props.cartProduct.map((product) => {
         return product.quantity;
       });
-
+   
       if (products) {
         const prices = this.props.products.map((product) => {
           return product.price;
         });
-
+    
         let pricesQty = [];
         for (var i = 0; i < prices.length; i++) {
           pricesQty.push(prices[i] * qty[i]);
         }
-
+      
         let total = pricesQty.reduce((partialSum, a) => partialSum + a, 0);
         this.setState({ total: total });
+
       }
     }
   }
@@ -54,23 +55,23 @@ class Cart extends React.Component {
 
     return (
      
-      <div>
+      <div class="relative max-w-7xl mx-auto my-7 text-center content-around">
         {cartProducts ? (
-          <div>
-            <h1>My Cart</h1>
-            <div>
+          <div >
+            <h1 class="font-serif font-bold text-2xl mt-6 md:mt-0 text-center">My Cart</h1>
+            <div class=" h-56 grid grid-cols-1 gap-4 content-center">
               {cartProducts.map((product) => {
                 return (
-                  <div key={product.id}>
+                  <div key={product.id} class="relative max-w-7xl mx-auto my-7 content-center">
                   <Wrapper>
                     
                     
-                    <img src={product.imageURL} width='120' />
+                    <img src={product.imageURL} width='120' class="h-fit object-cover rounded-lg content-center"/>
                     <h3>
-                    <span>
+                    <span class="font-sans text-base text-left font-bold italic content-around">
                       {product.brandName} {product.productName}{" "}
                     </span>
-                    <span>${product.price}</span>
+                    <span class="font-serif font-bold text-2xl mt-6 md:mt-0 content-around">${product.price}</span>
                     
                     <Button
                       size="medium"
@@ -94,7 +95,7 @@ class Cart extends React.Component {
                 );
               })}
             </div>
-            <h3>Total Price: ${this.state.total}</h3>
+            <h3 class="font-serif font-bold text-2xl mt-6 md:mt-0">Total Price: ${this.state.total}</h3>
             <Link to={`/cart/checkout/${this.props.cart.id}`}>
               <Button 
                size='medium'
@@ -107,7 +108,7 @@ class Cart extends React.Component {
           </div>
         ) : (
           <div id='announcement'>
-            <h1 id='announcementText'>Your Cart is Empty!</h1>
+            <h1 id='announcementText' class="font-serif font-bold text-2xl mt-6 md:mt-0">Your Cart is Empty!</h1>
           </div>
         )}
       </div>
