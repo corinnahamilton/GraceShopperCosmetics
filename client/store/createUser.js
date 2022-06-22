@@ -27,7 +27,7 @@ export const createUser = (user, history) => {
       },
     });
     dispatch(_createUser(name));
-    history.push('/');
+    history.push('/login');
   };
 };
 
