@@ -38,17 +38,29 @@ const ImageSlider = () => {
 };
 
 export const Home = (props) => {
-  const { email } = props;
-  console.log(email);
+  const { name, isLoggedIn } = props;
 
   return (
     <div>
-      <div id="welcomeContainer">
-        <h1 id="welcome">Welcome {email}</h1>
-      </div>
-      <div id="slidesContainer">
-        <ImageSlider />
-      </div>
+      {isLoggedIn ? (
+        <div>
+          <div className="welcomeContainer">
+            <h1 className="welcome">Welcome {name}!</h1>
+          </div>
+          <div className="slidesContainer">
+            <ImageSlider />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="welcomeContainer">
+            <h1 className="welcome">Welcome!</h1>
+          </div>
+          <div className="slidesContainer">
+            <ImageSlider />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

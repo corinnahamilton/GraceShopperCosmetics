@@ -35,14 +35,14 @@ nav#navbar {
   color: white;
 }
 
-#welcome {
+.welcome {
   font-family: Helvetica;
   font-size: 18px;
   color: rgb(103, 103, 103);
   align-content: center;
 }
 
-#welcomeContainer {
+.welcomeContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,10 +54,19 @@ nav#navbar {
   font-weight: 120;
 }
 
-#slidesContainer {
+.slidesContainer {
   display: flex;
   justify-content: center;
   align-content: center;
   align-self: center;
   padding: 20px;
+}
+
+#bannerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#banner {
+  width: 900px;
 }
