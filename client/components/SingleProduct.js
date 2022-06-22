@@ -4,52 +4,56 @@ import { singleProduct } from "../store/singleProduct";
 import { addToCartThunk } from "../store/cart";
 
 class SingleProduct extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
 
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.singleProduct(id);
-  }
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.singleProduct(id);
+    }
 
-  handleClick(event) {
-    const productId = event.target.value;
-    this.props.addToCart(productId);
-  }
+    handleClick(event) {
+        const productId = event.target.value;
+        this.props.addToCart(productId);
+    }
 
-  render() {
-    const product = this.props.product;
-   
-    return (
-      <div>
-        <h3>{product.productType}</h3>
-        <h2>{product.brandName}</h2>
-        <h1>{product.productName}</h1>
-        <h4>{product.description}</h4>
-        <h2>${product.price}</h2>
-        <h2>
-          <img src={product.imageURL} width="200" />
-        </h2>
-        <button type="button" value={product.id} onClick={this.handleClick}>
-          Add To Cart
-        </button>
-      </div>
-    );
-  }
+    render() {
+        const product = this.props.product;
+
+        return (
+            <div>
+                <h3>{product.productType}</h3>
+                <h2>{product.brandName}</h2>
+                <h1>{product.productName}</h1>
+                <h4>{product.description}</h4>
+                <h2>${product.price}</h2>
+                <h2>
+                    <img src={product.imageURL} width="200" />
+                </h2>
+                <button
+                    type="button"
+                    value={product.id}
+                    onClick={this.handleClick}
+                >
+                    Add To Cart
+                </button>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
-  product: state.singleProductReducer,
-  user: state.user,
+    product: state.singleProductReducer,
+    user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    singleProduct: (id) => dispatch(singleProduct(id)),
-    addToCart: (productId) => dispatch(addToCartThunk(productId)),
-  };
+    return {
+        singleProduct: (id) => dispatch(singleProduct(id)),
+        addToCart: (productId) => dispatch(addToCartThunk(productId)),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
