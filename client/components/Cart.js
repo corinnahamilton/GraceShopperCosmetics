@@ -12,7 +12,7 @@ class Cart extends React.Component {
     super();
     this.state = {
       total: 0,
-      slogan:''
+      slogan: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +26,7 @@ class Cart extends React.Component {
   }
   handleSubmit(cartId) {
     this.props.checkoutCart(cartId);
-    this.setState({ slogan: 'Thanks' });
+    this.setState({ slogan: "Thanks" });
     // this.props.getCart();
   }
 
@@ -72,7 +72,7 @@ class Cart extends React.Component {
                     <img src={product.imageURL} width='120' />
                     <h3>
                     <span>
-                      {product.brandName} {product.productName}{' '}
+                      {product.brandName} {product.productName}{" "}
                     </span>
                     <span>${product.price}</span>
                     
@@ -110,7 +110,9 @@ class Cart extends React.Component {
             </Link>
           </div>
         ) : (
-          <h1>Your Cart is Empty!</h1>
+          <div id="announcement">
+            <h1 id="announcementText">Your Cart is Empty!</h1>
+          </div>
         )}
       </div>
     );
@@ -130,7 +132,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),
   deleteFromCart: (cartId, productId) =>
     dispatch(deleteFromCartThunk(cartId, productId)),
-  checkoutCart: (cartId)=>dispatch(checkoutCartThunk(cartId))
+  checkoutCart: (cartId) => dispatch(checkoutCartThunk(cartId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -4,60 +4,98 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
-    <div>
-        <img src="https://i.postimg.cc/8CT6Kj1Q/banner.png" />
-
-        <nav id="navbar">
-            {isLoggedIn ? (
-                <div>
-                    {/* The navbar will show these links after you log in */}
-                    <Link to="/">Home</Link>
-                    <Link to="/products">🛍️ All</Link>
-                    <Link to="/products/face">🧴 Face</Link>
-                    <Link to="/products/eye">👁️ Eye</Link>
-                    <Link to="/products/lip">🫦 Lip</Link>
-                    <Link to="/products/nail">💅🏻 Nail</Link>
-                    <Link to="/logout" onClick={handleClick}>
-                        Log Out
-                    </Link>
-                    <Link to="/cart">🛒 Cart</Link>
-                    {isAdmin && <Link to="/login/admin">🛠️ Admin</Link>}
-                </div>
-            ) : (
-                <div>
-                    {/* The navbar will show these links after you log out */}
-                    <Link to="/">Home</Link>
-                    <Link to="/products">🛍️ All</Link>
-                    <Link to="/products/face">🧴 Face</Link>
-                    <Link to="/products/eye">👁️ Eye</Link>
-                    <Link to="/products/lip">🫦 Lip</Link>
-                    <Link to="/products/nail">💅🏻 Nail</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Sign Up</Link>
-                    <Link to="/cart/${userId}">🛒 Cart</Link>
-                </div>
-            )}
-        </nav>
-        <hr />
+  <div>
+    <div id="bannerContainer">
+      <img id="banner" src="https://i.postimg.cc/8CT6Kj1Q/banner.png" />
     </div>
+
+    <nav id="navbar">
+      {isLoggedIn ? (
+        <div className="navContainer">
+          {/* The navbar will show these links after you log in */}
+          <Link to="/" className="link">
+            Home
+          </Link>
+          <Link to="/products" className="link">
+            All
+          </Link>
+          <Link to="/products/face" className="link">
+            Face
+          </Link>
+          <Link to="/products/eye" className="link">
+            Eye
+          </Link>
+          <Link to="/products/lip" className="link">
+            Lip
+          </Link>
+          <Link to="/products/nail" className="link">
+            Nail
+          </Link>
+          <Link to="/logout" className="link" onClick={handleClick}>
+            Log Out
+          </Link>
+          <Link to="/cart" className="link">
+            Cart
+          </Link>
+          {isAdmin && (
+            <Link to="/login/admin" className="link">
+              🛠️ Admin
+            </Link>
+          )}
+        </div>
+      ) : (
+        <div className="navContainer">
+          {/* The navbar will show these links after you log out */}
+          <Link to="/" className="link">
+            Home
+          </Link>
+          <Link to="/products" className="link">
+            All
+          </Link>
+          <Link to="/products/face" className="link">
+            Face
+          </Link>
+          <Link to="/products/eye" className="link">
+            Eye
+          </Link>
+          <Link to="/products/lip" className="link">
+            Lip
+          </Link>
+          <Link to="/products/nail" className="link">
+            Nail
+          </Link>
+          <Link to="/login" className="link">
+            Login
+          </Link>
+          <Link to="/signup" className="link">
+            Sign Up
+          </Link>
+          <Link to="/cart/${userId}" className="link">
+            Cart
+          </Link>
+        </div>
+      )}
+    </nav>
+    <hr />
+  </div>
 );
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
-    return {
-        isLoggedIn: !!state.auth.id,
-        isAdmin: state.auth.userType == "admin",
-    };
+  return {
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.userType == "admin",
+  };
 };
 
 const mapDispatch = (dispatch) => {
-    return {
-        handleClick() {
-            dispatch(logout());
-        },
-    };
+  return {
+    handleClick() {
+      dispatch(logout());
+    },
+  };
 };
 
 export default connect(mapState, mapDispatch)(Navbar);
