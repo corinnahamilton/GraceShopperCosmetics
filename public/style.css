@@ -1,28 +1,72 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f2f2;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 label {
-    display: block;
+  display: block;
 }
 
 nav a {
-    display: inline-block;
-    margin: 1em;
+  display: inline-block;
+  margin: 1em;
 }
 
 form div {
-    margin: 1em;
-    display: inline-block;
+  margin: 1em;
+  display: inline-block;
 }
 
 nav#navbar {
-    background-color: #e6dad1;
-    font-family: Helvetica;
-    font-weight: bold;
+  background-color: #cf9671;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 200px;
+  margin-right: 200px;
+  color: white;
+}
+
+.welcome {
+  font-family: Helvetica;
+  font-size: 18px;
+  color: rgb(103, 103, 103);
+  align-content: center;
+}
+
+.welcomeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  color: #efd3cf;
+  font-size: 20px;
+  font-weight: 120;
+}
+
+.slidesContainer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  padding: 20px;
+}
+
+#bannerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#banner {
+  width: 900px;
 }
