@@ -113,7 +113,6 @@ const mapStateToProps = (state) => {
     user: state.user,
     cart: state.cartReducer,
     cartProduct: state.cartProductReducer,
-    isLoggedIn: !!state.auth.id,
   };
 };
 
