@@ -54,8 +54,8 @@ export const Home = (props) => {
         </div>
       ) : (
         <div>
+          <br />
           <div className='welcomeContainer'>
-            <br />
             <h1 className='welcome'>Welcome!</h1>
           </div>
           <div className='slidesContainer'>
